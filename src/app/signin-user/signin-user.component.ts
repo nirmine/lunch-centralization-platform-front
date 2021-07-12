@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin-user',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
+  user:any={};
+  onSubmitt()
+  {
+    localStorage.setItem('userId',this.user.id);
+    this.router.navigate(['addNewDish']);
+    
+  }
 }

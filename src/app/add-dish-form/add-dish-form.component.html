@@ -1,0 +1,39 @@
+  
+<div style="margin-top: 180px; margin-bottom: 150px;margin-right: 100px;margin-left: -50px;">
+
+    <h2 style="color: black;">Add a dish to this restaurant's menu</h2>
+    <div>
+      <form (ngSubmit)="onSubmit()"> 
+        <!-- First name -->   
+        <div class="form-group">
+          <label for="nom">Dish's name</label>
+          <input type="text" class="form-control" placeholder="Entre the name of the restaurant" #name="ngModel" id="name" required [(ngModel)]="menu.name" name="name" >
+        </div>
+        <div [hidden]="name.valid || name.pristine">The dish's name is required </div>
+        <!-- Last name -->
+        <div class="form-group">
+            <label for="composition">Dish's composition</label>
+            <input type="text" class="form-control" placeholder="Enter the dish's composition " #composition="ngModel" id="composition" required [(ngModel)]="menu.composition" name="composition" >
+        </div>  
+        <div [hidden]="composition.valid || composition.pristine">The dish's composition is required </div>
+     
+        <div class="form-group">
+          <label for="composition">Dish's price</label>
+          <input type="text" class="form-control" placeholder="Entrer the dish's price " #price="ngModel" id="price" required [(ngModel)]="menu.price" name="price" >
+      </div>  
+      <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
+   
+      <div class="form-group">
+        <label for="composition">Dish's image</label>
+        <input type="image" class="form-control" placeholder="Entrer the dish's image " #image="ngModel" id="price" required [(ngModel)]="testimage.image" name="image" >
+    </div>  
+    <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
+ 
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+
+
+ </div>
+

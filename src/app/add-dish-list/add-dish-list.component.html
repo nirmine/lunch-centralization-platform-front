@@ -1,0 +1,67 @@
+
+<div *ngIf="menus.length" style="margin-top: 180px; margin-bottom: 150px;" >
+    <h3  style="color: black;">Menu</h3>
+    <br>
+    <table class="table table-hover table-sm">
+        <thead class="thead-dark">
+          <tr>
+            
+            <th>Dish's name</th>
+            <th>Composition</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let dish of menus">
+             
+              <td>{{dish['name']}}</td>
+              <td>{{dish['composition']}}</td>
+              <td>{{dish['price']}}</td>
+              <td>
+
+                <tr>
+               <td> <button type="button" class="btn btn-danger"   data-toggle="modal" data-target="#delete-modal" (click)="prepareDeleteMenu(dish)" >&times;</button></td>
+               <td><button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#edit-modal" (click)="showMenuToUpdate(dish)"  >edit</button></td>
+              </tr>
+              </td>
+            
+            </tr>
+        </tbody>
+        
+       
+    </table>
+
+    <div *ngIf="update==true" >
+      <h2  style="color: black;">Update the dish</h2>
+      <div>
+        <form (ngSubmit)="updateDish()"> 
+          <!-- dish's name -->   
+          <div class="form-group">
+            <label for="nom">Dish's name</label>
+            <input type="text" class="form-control" placeholder="Enter the new name "  id="name" required #name="ngModel" name="name" value="{{newMenu.name}}" required [(ngModel)]="newMenu.name" >
+          </div>
+          <div [hidden]="name.valid || name.pristine">The dish's name is required </div>
+          <!-- Last name -->
+          <div class="form-group">
+              <label for="composition">Dish's composition</label>
+              <input type="text" class="form-control" placeholder="Enter the new composition "  id="composition" required #composition="ngModel"  name="composition" value="{{newMenu.composition}}" required [(ngModel)]="newMenu.composition">
+          </div>  
+          <div [hidden]="composition.valid || composition.pristine">The dish's composition is required </div>
+       
+          <div class="form-group">
+            <label for="composition">Dish's price</label>
+            <input type="text" class="form-control" placeholder="Enter the new price"  id="price" required #price="ngModel"  name="price" value="{{newMenu.price}}" required [(ngModel)]="newMenu.price">
+        </div>  
+        <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
+     
+
+          <button type="submit" class="btn btn-success">Submit</button>
+          <button type="button" class="btn btn-success" (click)="update=false" style="background-color: mediumpurple;">cancel</button>
+        </form>
+      </div>
+    
+    </div>
+    
+    
+</div>

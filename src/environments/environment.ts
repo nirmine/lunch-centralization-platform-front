@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // Your web app's Firebase configuration
+ firebaseConfig :{
+    apiKey: "AIzaSyBOHL9vW8pw-nfMCohbRx939amG9pVhX0s",
+    authDomain: "centralisation-des-commandes.firebaseapp.com",
+    databaseURL: "https://centralisation-des-commandes-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "centralisation-des-commandes",
+    storageBucket: "centralisation-des-commandes.appspot.com",
+    messagingSenderId: "349537234027",
+    appId: "1:349537234027:web:6f1196c25c8b10f878152e"
+  },
 };
 
 /*

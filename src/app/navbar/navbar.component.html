@@ -17,6 +17,7 @@
           <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
           <li><a class="nav-link scrollto" href="#specials">Specials</a></li>
           <li><a class="nav-link scrollto" href="#events">Events</a></li>
+          
           <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
          <!-- <li class="dropdown"><a href="#"class="book-a-table-btn scrollto d-none d-lg-flex"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -40,8 +41,8 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="#signIn" class="book-a-table-btn scrollto d-none d-lg-flex" >sign in</a>
-
+      <a (click)="signIn()" class="book-a-table-btn scrollto d-none d-lg-flex" >sign in</a>
+      <a  class="book-a-table-btn scrollto d-none d-lg-flex" >sign out</a>
     </div>
   </header><!-- End Header -->
   <router-outlet></router-outlet>
