@@ -1,3 +1,4 @@
+import { FileUpload } from './../models/restaurant';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Menu } from '../models/menu';
@@ -34,12 +35,21 @@ export class AddDishFormComponent implements OnInit {
   }
   */
   reset(){
-    this.menu= new Menu();
+   /* this.menu= new Menu();
+    this.currentFileUpload=new FileUpload(null);*/
+    if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
   }
 
   onSubmit() {
     this.save();
-    this.reset();
+    this. upload();
+   
+    console.log("done")
   }
 
   test()
@@ -47,4 +57,29 @@ export class AddDishFormComponent implements OnInit {
 
   }
   
+  currentFileUpload: FileUpload;
+  percentage: number;
+  selectedFiles: FileList;
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+  upload() {
+    const file = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
+
+    this.currentFileUpload = new FileUpload(file);
+    this.restService.pushFileToStorage(this.userId,this.menu.name,this.currentFileUpload).subscribe(
+      percentage => {
+        this.percentage = Math.round(percentage);
+        if(this.percentage==100)
+          {
+            console.log("100");
+            this.reset();
+          }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

@@ -9,15 +9,23 @@
             <th>Dish's name</th>
             <th>Composition</th>
             <th>Price</th>
+            <th>image</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let dish of menus">
+            <tr *ngFor="let dish of menus "  >
              
               <td>{{dish['name']}}</td>
               <td>{{dish['composition']}}</td>
               <td>{{dish['price']}}</td>
+              <td>
+
+              <img 
+                src="{{map.get(dish['name'])}} "
+                alt="no image" style="height: 50px;width: 50px;">
+
+              </td>
               <td>
 
                 <tr>

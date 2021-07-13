@@ -24,13 +24,16 @@
       <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
    
       <div class="form-group">
-        <label for="composition">Dish's image</label>
-        <input type="image" class="form-control" placeholder="Entrer the dish's image " #image="ngModel" id="price" required [(ngModel)]="testimage.image" name="image" >
+      <div *ngIf="currentFileUpload" class="progress">
+        <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
+      </div>
+      <label for="composition">Dish's image</label>
+      <input type="file" (change)="selectFile($event)" class="form-control">
     </div>  
-    <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
- 
+  
 
-        <button type="submit" class="btn btn-success">Submit</button>
+
+        <button type="submit" class="btn btn-success" style="margin-top: 50px;">Submit</button>
       </form>
     </div>
 

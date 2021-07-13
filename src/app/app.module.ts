@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ListRestaurantComponent } from './list-restaurant/list-restaurant.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { DashboardProxymianComponent } from './dashboard-proxymian/dashboard-proxymian.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +29,7 @@ import {HttpClientModule} from '@angular/common/http';
     AddDishFormComponent,
     AddDishListComponent,
     ListRestaurantComponent,
+    DashboardProxymianComponent,
    
 
   ],
@@ -38,6 +41,7 @@ import {HttpClientModule} from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     HttpClientModule,
+    AngularFireStorageModule
    
   ],
   providers: [],

@@ -1,0 +1,86 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="container row" style="margin-top: 150px;">
+	<div class='sidenav col-3' id='navBar'>
+	    <div class='list-group'>
+	        <div href='#' class='list-group-item active list-group-item-action' data-toggle="list" role="tab">Overview</div>
+	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">Submissions</div>
+	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">Screened</div>
+	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">In-Progress</div>
+	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">Completed</div>
+	    </div>
+	</div>
+	<div class='col-9' id='main'>
+		<div class='card-deck'>
+	        <div class='card' id='ifom-card'>
+	            <div class='card-header d-flex justify-content-center' id='ifom-card-header'>
+	                <h5>IFOM</h5>
+	            </div>
+	            <div class='card-body d-flex justify-content-center' id='ifom-card-body'>
+	                
+                    
+
+
+
+                    
+	            </div>
+	        </div>
+	        <div class='card' id='proj-card'>
+	            <div class='card-header d-flex justify-content-center' id='proj-card-header'>
+	                <h5>Projects</h5>
+	            </div>
+	            <div class="card-body d-flex justify-content-center" id='proj-card-body'>
+	                  
+
+
+
+
+	            </div>
+	        </div>
+	        <div class='card' id='stats-card'>
+	            <div class='card-header d-flex justify-content-center' id='stats-card-header'>
+	                <h5>Command Stats</h5>
+	            </div>
+	            <div class="card-body d-flex justify-content-center" id='stats-card-body'>
+	               
+
+
+
+
+
+
+	            </div>
+	        </div>
+	    </div>
+
+	    <div class='row p-1'>
+	        <div class='col'>
+	            <div class='card' id='tab-card'>
+        	        <div class='card-header' id='tab-card-header'>
+        	            <h5>Project Status</h5>
+        	        </div>
+        	        <div class='card-body' id='tab-card-header'>
+        	            <div id='table'></div>
+        	        </div>
+        	    </div>
+	        </div>
+    	</div>
+        
+	</div>
+</div>
+
+<div class="modal fade" id="status-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id='status-modal-content'>
+      <div class="modal-header d-flex justify-content-center" id='status-modal-header'>
+      </div>
+      <div class="modal-body" id='status-modal-body'>
+      </div>
+      <div class="modal-footer" id='status-modal-footer'>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id='status-modal-close'>Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

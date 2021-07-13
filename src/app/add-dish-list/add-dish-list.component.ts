@@ -34,9 +34,10 @@ export class AddDishListComponent implements OnInit {
       this.showMenu=new Menu();
     }
   }
-
+  map = new Map();
   retrieveAllMenus() {
-    
+    let elt:any={};
+    let e:any={};
     this.resService.getMenusList(this.Restaukey).snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
@@ -45,7 +46,20 @@ export class AddDishListComponent implements OnInit {
       )
     ).subscribe(menus => {
       this.menus = menus;
-  // console.log( this.menus)
+     
+  for (elt in this.menus) 
+  {
+    //console.log( elt)//this.menus[0]['img'][ elt['img']].url)
+    for (e in this.menus[elt]['img']) //e=key
+    {
+      //console.log(this.menus[elt]['img'][e].url) : dish's url 
+      //console.log( this.menus[elt]['name']) : dish's name
+       this.map.set(this.menus[elt]['name'],this.menus[elt]['img'][e].url);
+     }
+
+   }
+     
+       console.log(this.map);
     }, (error) => {
       console.log(error);
     });           
@@ -87,5 +101,10 @@ updateDish()
 {
   this.update=false;
   this.resService.updateMenu(this.Restaukey,this.menuKey,this.newMenu) .catch(error => { console.log(error); });
+}
+
+test()
+{
+  console.log(this.menus)
 }
 }
