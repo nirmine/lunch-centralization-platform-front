@@ -18,6 +18,8 @@ import { ListRestaurantComponent } from './list-restaurant/list-restaurant.compo
 import {HttpClientModule} from '@angular/common/http';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DashboardProxymianComponent } from './dashboard-proxymian/dashboard-proxymian.component';
+import { ProfilRestaurantComponent } from './profil-restaurant/profil-restaurant.component';
+import { EditRestauInfosComponent } from './edit-restau-infos/edit-restau-infos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,8 @@ import { DashboardProxymianComponent } from './dashboard-proxymian/dashboard-pro
     AddDishListComponent,
     ListRestaurantComponent,
     DashboardProxymianComponent,
+    ProfilRestaurantComponent,
+    EditRestauInfosComponent,
    
 
   ],

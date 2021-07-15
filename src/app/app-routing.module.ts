@@ -1,3 +1,5 @@
+import { EditRestauInfosComponent } from './edit-restau-infos/edit-restau-infos.component';
+import { ProfilRestaurantComponent } from './profil-restaurant/profil-restaurant.component';
 import { DashboardProxymianComponent } from './dashboard-proxymian/dashboard-proxymian.component';
 import { AddDishComponent } from './add-dish/add-dish.component';
 import { SigninUserComponent } from './signin-user/signin-user.component';
@@ -12,6 +14,8 @@ const routes: Routes = [
   { path: 'signInUser', component: SigninUserComponent },
   { path: 'addNewDish', component: AddDishComponent },
   { path: 'dashboard', component: DashboardProxymianComponent },
+   { path: 'profilRestau', component: ProfilRestaurantComponent },
+   { path: 'editprofilRestau', component: EditRestauInfosComponent },
 
 ];
 

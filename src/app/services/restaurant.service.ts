@@ -17,6 +17,7 @@ export class RestaurantService {
 
   constructor(public db: AngularFireDatabase,private Http: HttpClient,private storage: AngularFireStorage) { 
     this.menusRef = db.list(this.MenuPath);
+    this.restausRef=db.list(this.restauPath)
   }
   
   createDishByKey(restauKey:any,dishkey:any,dish:Menu)
@@ -79,10 +80,36 @@ getImages()
   items = this.db.list('items').valueChanges();
 }
 
+restausRef: AngularFireList<any> ;
+createCustomer(restauKey:any,restau:any): any {
+  let ref=this.db.database.ref(this.restauPath);
+      return ref.child(restauKey).set(restau);
+ }
 
+ updateRestau(key: any, value: any): Promise<void> {
+  return this.restausRef.update(key, value);
+}
 
-
-
+private restauStoragePath = '/restaus';
+pushRestauImageToStorage(restauKey:any,fileUpload: FileUpload): any {
+  let filePath = `${this.restauStoragePath}/${fileUpload.file.name}`;
+  let storageRef = this.storage.ref(filePath);
+  let uploadTask = this.storage.upload(filePath, fileUpload.file);
+  uploadTask.snapshotChanges().pipe(
+    finalize(() => {
+      storageRef.getDownloadURL().subscribe(downloadURL => {
+        console.log('File available at', downloadURL);
+        fileUpload.url = downloadURL;
+        fileUpload.name = fileUpload.file.name;
+        this.saveRestauImageData(restauKey,fileUpload);
+      });
+    })
+  ).subscribe();
+  return uploadTask.percentageChanges();
+}
+ saveRestauImageData(restauKey:any,fileUpload: FileUpload) {
+  this.db.list(this.restauPath+'/'+restauKey+'/img').push(fileUpload);
+}
 
 
 
