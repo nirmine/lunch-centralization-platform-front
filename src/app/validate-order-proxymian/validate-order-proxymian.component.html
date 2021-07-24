@@ -1,0 +1,91 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+
+    <div class="container"  style="margin-top: 100px; ">
+    	<div class="section-title">
+        <h2 ></h2>
+        <p>Check Your Order</p>
+      </div>
+    	<div class="row">
+            
+            
+             <div class="col-md-12">
+                <h4>Shopping Invoice From this restaurant</h4>
+            </div>
+            
+            <div class="col-lg-12 col-md-12 ml-auto mr-auto">
+                <div class="table-responsive">
+                <table class="table table-shopping">
+                    <thead>
+                        <tr>
+                            <th class="text-center"></th>
+                            <th>Name</th>
+                            <th class="th-description">Color</th>
+                            <th class="th-description text-right">Size</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Qty</th>
+                           
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dish of orderList">
+                            <td>
+                                <div class="img-container">
+                                    <img src="https://cdn.shopify.com/s/files/1/0128/9452/products/apparel_outerwear_tsm_fleece-varsity_black_01_1024x1024.jpg?v=1522083098" alt="...">
+                                </div>
+                            </td>
+                            <td class="td-name">
+                                <a href="#jacket">{{dish.name}}</a>
+                                <br><small>{{dish.composition}}</small>
+                            </td>
+                            <td>
+                                Red
+                            </td>
+                            <td class="text-center">
+                                M
+                            </td>
+                            <td class="td-number text-center">
+                              {{dish.price}}<small>dt</small>
+                            </td>
+                            <td class="td-number">
+                                {{dish.nbr}}
+                                <div class="btn-group">
+                                    <button class="btn btn-round btn-info btn-sm" (click)="removeItem(dish.name)"> <i class="material-icons">remove</i> </button>
+                                    <button class="btn btn-round btn-info btn-sm" (click)="addItem(dish.name)"> <i class="material-icons">add</i> </button>
+                                </div>
+                            </td>
+                            
+                            <td class="td-actions">
+                                <button type="button"   class="btn btn-link"  (click)=" deleteOrderedDish(dish.name)">
+                                    <i class="material-icons">close</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3">
+                          </td>
+                          <td class="td-total">
+                             Total
+                          </td>
+                          <td class="td-price text-center">
+                              {{total}}<small>dt</small>
+                          </td>
+                          <td colspan="3" class="text-right"> <button type="button" class="btn btn-info btn-round"(click)=" confirmOrder()">Complete Purchase <i class="material-icons">keyboard_arrow_right</i></button></td>
+  
+                      </tr>
+                    </tbody>
+                </table>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    

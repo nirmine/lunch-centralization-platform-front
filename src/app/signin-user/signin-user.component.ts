@@ -20,4 +20,7 @@ export class SigninUserComponent implements OnInit {
     this.router.navigate(['addNewDish']);
     
   }
+  checkLogin() {
+    
+  }
 }

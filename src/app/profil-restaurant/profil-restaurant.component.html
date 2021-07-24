@@ -1,49 +1,150 @@
-<main>
-    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
-        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-            
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span> <span class="float-end price-hp">12354.00€</span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                    </div>
-                </div>
-            </div>
-            <!--
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/notebook-laptop-png-images-you-can-download-mashtrelo-14.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-success">12354.00€</span> <span class="float-end"><a href="#">Example</a></span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="d-grid gap-2 my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
-                    <div class="label-top shadow-sm">Asus Rog</div>
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-success">12354.00€</span> <span class="float-end"><a href="#" class="small text-muted">Reviews</a></span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                        <div class="clearfix mb-1"> <span class="float-start"><i class="far fa-question-circle"></i></span> <span class="float-end"><i class="fas fa-plus"></i></span> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/notebook-laptop-png-images-you-can-download-mashtrelo-14.png" class="card-img-top" alt="...">
-                    <div class="label-top shadow-sm">DELL</div>
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start price-hp">12354.00€</span> <span class="float-end"><a class="text-muted small" href="#">Reviews</a></span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                        <div class="clearfix mb-1"> <span class="float-start"><i class="far fa-question-circle"></i></span> <span class="float-end"><i class="fas fa-plus"></i></span> </div>
-                    </div>
-                </div>
-            </div>
-        -->
+<!-- ======= Menu Section ======= -->
+<section id="menu" class="menu section-bg">
+    <div class="container" data-aos="fade-up" style="margin-top: 80px; margin-bottom: 1000px;">
+
+      <div class="section-title">
+        <h2>Menu</h2>
+        <p>Check Our Tasty Menu</p>
+      </div>
+      <div class="book-a-table" style="margin-left: 80%;"><div class="php-email-form"><button type="button">Total order</button></div></div>
+
+      <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="menu-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            <li data-filter=".filter-starters">Starters</li>
+            <li data-filter=".filter-salads">Salads</li>
+            <li data-filter=".filter-specialty">Specialty</li>
+          </ul>
         </div>
+      </div>
+
+      <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+        <div *ngFor="let dish of menus " >
+        <div class="col-lg-6 menu-item filter-starters"  *ngIf="dish['type']=='starter'">
+          <img src="{{map.get(dish['name'])}} " class="menu-img" alt=""  >
+          <div class="menu-content">
+            <a href="#">{{dish['name']}}</a><span>{{dish['price']}}dt</span>
+          </div>
+          <div class="menu-ingredients">
+            {{dish['composition']}}
+          </div>
+          <div class="menu-ingredients" style="margin-left: 120px;">
+            <a (click)=" orderDish(dish['name'])" class="ord">==order==></a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-specialty" *ngIf="dish['type']=='speciality'">
+          <img src="{{map.get(dish['name'])}} " class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">{{dish['name']}}</a><span>{{dish['price']}}dt</span>
+          </div>
+          <div class="menu-ingredients">
+            {{dish['composition']}}
+          </div>
+          <div class="menu-ingredients" style="margin-left: 120px;">
+            <a (click)=" orderDish(dish['name'])" class="ord">==order==></a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-salads" *ngIf="dish['type']=='salad'">
+          <img src="{{map.get(dish['name'])}} " class="menu-img" alt="">
+          <div class="menu-content">
+            <a >{{dish['name']}}</a><span>{{dish['price']}}dt</span>
+          </div>
+          <div class="menu-ingredients">
+            {{dish['composition']}}
+          </div>
+          <div class="menu-ingredients" style="margin-left: 120px;">
+            <a (click)=" orderDish(dish['name'])" class="ord">==order==></a>
+          </div>
+        </div>
+        
+      </div>
+        <!--<div class="col-lg-6 menu-item filter-specialty">
+          <img src="assets/img/menu/bread-barrel.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Bread Barrel</a><span>$6.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Lorem, deren, trataro, filede, nerada
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-starters">
+          <img src="assets/img/menu/cake.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Crab Cake</a><span>$7.95</span>
+          </div>
+          <div class="menu-ingredients">
+            A delicate crab cake served on a toasted roll with lettuce and tartar sauce
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-salads">
+          <img src="assets/img/menu/caesar.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Caesar Selections</a><span>$8.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Lorem, deren, trataro, filede, nerada
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-specialty">
+          <img src="assets/img/menu/tuscan-grilled.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Tuscan Grilled</a><span>$9.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Grilled chicken with provolone, artichoke hearts, and roasted red pesto
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-starters">
+          <img src="assets/img/menu/mozzarella.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Mozzarella Stick</a><span>$4.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Lorem, deren, trataro, filede, nerada
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-salads">
+          <img src="assets/img/menu/greek-salad.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Greek Salad</a><span>$9.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Fresh spinach, crisp romaine, tomatoes, and Greek olives
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-salads">
+          <img src="assets/img/menu/spinach-salad.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Spinach Salad</a><span>$9.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
+          </div>
+        </div>
+
+        <div class="col-lg-6 menu-item filter-specialty">
+          <img src="assets/img/menu/lobster-roll.jpg" class="menu-img" alt="">
+          <div class="menu-content">
+            <a href="#">Lobster Roll</a><span>$12.95</span>
+          </div>
+          <div class="menu-ingredients">
+            Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
+          </div>
+        </div>
+    -->
+      </div>
+
     </div>
-</main>
+   
+   
+  </section><!-- End Menu Section -->
+  

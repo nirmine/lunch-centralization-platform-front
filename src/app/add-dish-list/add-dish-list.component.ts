@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Menu } from '../models/menu';
 import { RestaurantService } from '../services/restaurant.service';
 import { map } from 'rxjs/operators';
+import { FileUpload } from '../models/restaurant';
 @Component({
   selector: 'app-add-dish-list',
   templateUrl: './add-dish-list.component.html',
@@ -85,9 +86,16 @@ menuName:string="";
 menuComposition:string="";
 menuKey:string="";
 newMenu:  any={};
+dishImageKey:any="";
 showMenuToUpdate(toUpdateMenu:any)
 {
-  console.log(toUpdateMenu)
+  let elt:any={};
+    let e:any={};
+    
+    for(elt in toUpdateMenu.img)
+    this.dishImageKey=elt;
+  //console.log(toUpdateMenu.img.key)
+
 this.update=true;
 //this.varGlobals.update=true;
 this.newMenu.name=toUpdateMenu.name;
@@ -100,11 +108,33 @@ this.menuKey=toUpdateMenu.key;
 updateDish()
 {
   this.update=false;
+  this.upload();
   this.resService.updateMenu(this.Restaukey,this.menuKey,this.newMenu) .catch(error => { console.log(error); });
 }
 
 test()
 {
   console.log(this.menus)
+}
+currentFileUpload: FileUpload;
+percentage: number;
+selectedFiles: FileList;
+selectFile(event) {
+  this.selectedFiles = event.target.files;
+}
+upload() {
+  const file = this.selectedFiles.item(0);
+  this.selectedFiles = undefined;
+
+  this.currentFileUpload = new FileUpload(file);
+  this.resService.pushupdatedFileToStorage(this.dishImageKey,this.Restaukey,this.newMenu.name,this.currentFileUpload).subscribe(
+    percentage => {
+      this.percentage = Math.round(percentage);
+     
+    },
+    error => {
+      console.log(error);
+    }
+  );
 }
 }

@@ -22,7 +22,22 @@
           <input type="text" class="form-control" placeholder="Entrer the dish's price " #price="ngModel" id="price" required [(ngModel)]="menu.price" name="price" >
       </div>  
       <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
+
+      
+    <div class="form-group">
+      <label for="composition">Dish's type</label>
+      
+            <select class="browser-default " name="type" id="type" #type="ngModel" id="type" required [(ngModel)]="menu.type">
+              
+              <option value="starter" class="form-control" selected>starter</option>
+              <option value="salad" class="form-control">salad</option>
+              <option value="speciality" class="form-control">speciality</option>
+             
+            </select>
    
+      </div>
+      <div [hidden]="type.valid || type.pristine">The dish's type is required </div>
+    
       <div class="form-group">
       <div *ngIf="currentFileUpload" class="progress">
         <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
@@ -31,7 +46,6 @@
       <input type="file" (change)="selectFile($event)" class="form-control">
     </div>  
   
-      
 
         <button type="submit" class="btn btn-success" style="margin-top: 50px;">Submit</button>
       </form>

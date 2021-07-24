@@ -1,0 +1,24 @@
+<div style="margin-top: 180px; margin-bottom: 150px;margin-left: 100px;margin-right: 800px;">
+    <h2 style="color: black;">Add a new restaurant</h2>
+    <div>
+      <form (ngSubmit)="onSubmit()"> 
+        <!-- id-->   
+        <div class="form-group">
+          <label for="id">Restaurant identifier</label>
+          <input type="text" class="form-control" placeholder="Enter the restaurant's identifier'"  id="id" required [(ngModel)]="restau.id" name="id">
+        </div>
+        <!-- Last name -->
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter the password of the restaurant"  id="pwd" required [(ngModel)]="restau.pwd" name="pwd">
+        </div>  
+       <!--  name -->
+       <div class="form-group">
+        <label for="name">Name of the restaurant</label>
+        <input type="text" class="form-control" placeholder="Enter the name of the restaurant"  id="name" required [(ngModel)]="restau.name" name="name">
+    </div>  
+     
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+    </div>

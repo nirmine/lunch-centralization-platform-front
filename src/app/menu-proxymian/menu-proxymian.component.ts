@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
 import { map } from 'rxjs/operators';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
-  selector: 'app-profil-restaurant',
-  templateUrl: './profil-restaurant.component.html',
-  styleUrls: ['./profil-restaurant.component.css']
+  selector: 'app-menu-proxymian',
+  templateUrl: './menu-proxymian.component.html',
+  styleUrls: ['./menu-proxymian.component.css']
 })
-export class ProfilRestaurantComponent implements OnInit {
-  
-  constructor(private resService:RestaurantService) {
+export class MenuProxymianComponent implements OnInit {
+
+  constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
     this.idRestau=localStorage.getItem('restauId');
     this.userId=localStorage.getItem('userId');
     this.retrieveAllMenus();
@@ -51,11 +52,17 @@ export class ProfilRestaurantComponent implements OnInit {
       console.log(error);
     });           
   }
-nbr:number=9;
+nbr:number=1;
   orderDish(dishkey:any)
   {
 console.log(dishkey)
 console.log(this.resService.updateOrderList(this.userId,dishkey,this.idRestau,this.nbr));
   }
 
+  goToOrderValidationPage()
+  {
+   
+    
+   this.router.navigate(['validateOrder']);
+  }
 }

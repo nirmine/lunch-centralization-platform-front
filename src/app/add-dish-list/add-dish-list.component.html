@@ -62,10 +62,30 @@
             <input type="text" class="form-control" placeholder="Enter the new price"  id="price" required #price="ngModel"  name="price" value="{{newMenu.price}}" required [(ngModel)]="newMenu.price">
         </div>  
         <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
-     
 
-          <button type="submit" class="btn btn-success">Submit</button>
-          <button type="button" class="btn btn-success" (click)="update=false" style="background-color: mediumpurple;">cancel</button>
+        <div class="form-group">
+          <label for="composition">Dish's type</label>
+          
+                <select class="browser-default " name="type" id="type" #type="ngModel" id="type" value="{{newMenu.type}}" required [(ngModel)]="newMenu.type">
+                  
+                  <option value="starter" class="form-control" selected>starter</option>
+                  <option value="salad" class="form-control">salad</option>
+                  <option value="speciality" class="form-control">speciality</option>
+                 
+                </select>
+       
+        </div>
+        
+        <div class="form-group">
+          <div *ngIf="currentFileUpload" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
+          </div>
+          <label for="composition">Dish's image</label>
+          <input type="file" (change)="selectFile($event)" class="form-control">
+        </div> 
+
+          <button type="submit" class="btn btn-success" style="margin-top: 50px;">Submit</button>
+          <button type="button" class="btn btn-success" (click)="update=false" style="background-color: mediumpurple;margin-top: 50px;" >cancel</button>
         </form>
       </div>
     

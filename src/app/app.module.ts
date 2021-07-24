@@ -20,6 +20,12 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { DashboardProxymianComponent } from './dashboard-proxymian/dashboard-proxymian.component';
 import { ProfilRestaurantComponent } from './profil-restaurant/profil-restaurant.component';
 import { EditRestauInfosComponent } from './edit-restau-infos/edit-restau-infos.component';
+import { MenuProxymianComponent } from './menu-proxymian/menu-proxymian.component';
+import { ValidateOrderProxymianComponent } from './validate-order-proxymian/validate-order-proxymian.component';
+import { GiveFeedbackProxymianComponent } from './give-feedback-proxymian/give-feedback-proxymian.component';
+import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
+import { AddRestaurantAdminComponent } from './add-restaurant-admin/add-restaurant-admin.component';
+import { AddAdminSuperComponent } from './add-admin-super/add-admin-super.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +40,12 @@ import { EditRestauInfosComponent } from './edit-restau-infos/edit-restau-infos.
     DashboardProxymianComponent,
     ProfilRestaurantComponent,
     EditRestauInfosComponent,
+    MenuProxymianComponent,
+    ValidateOrderProxymianComponent,
+    GiveFeedbackProxymianComponent,
+    DashboardAdminComponent,
+    AddRestaurantAdminComponent,
+    AddAdminSuperComponent,
    
 
   ],

@@ -1,176 +1,195 @@
- <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<div class="container row" style="margin-top: 150px;">
-	<div class='sidenav col-3' id='navBar'>
-	    <div class='list-group'>
-	        <div href='#' class='list-group-item active list-group-item-action' data-toggle="list" role="tab">Overview</div>
-	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">Submissions</div>
-	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">Screened</div>
-	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">In-Progress</div>
-	        <div href='#' class='list-group-item list-group-item-action' data-toggle="list" role="tab">Completed</div>
-	    </div>
-	</div>
-	<div class='col-9' id='main'>
-		<div class='card-deck'>
-	        <div class='card' id='ifom-card'>
-	            <div class='card-header d-flex justify-content-center' id='ifom-card-header'>
-	                <h5>IFOM</h5>
-	            </div>
-	            <div class='card-body d-flex justify-content-center' id='ifom-card-body'>
-	                
-                    
 
 
+    <!-- ======= Chefs Section ======= -->
+    <section id="chefs" class="chefs" style="margin-top: 80px; ;margin-left: -200px;" >
+      <div class="container" data-aos="fade-up">
 
-                    
-	            </div>
-	        </div>
-	        <div class='card' id='proj-card'>
-	            <div class='card-header d-flex justify-content-center' id='proj-card-header'>
-	                <h5>Projects</h5>
-	            </div>
-	            <div class="card-body d-flex justify-content-center" id='proj-card-body'>
-	                  
+        <div class="section-title">
+          <h2>restaurants</h2>
+          <p>Check Our restaurants</p>
+        </div>
 
+        <div class="row">
 
+          <div class="col-lg-4 col-md-6" *ngFor="let restau of restausList" style="width: 300px;height:250px;">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+              <img src="{{map.get(restau['name'])}} " class="img-fluid" alt="" style="width: 300px;height:250px;">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>{{restau.name}}</h4>
+                  <span>{{restau.address}}</span>
+                </div>
+                <div class="social">
+                  <a (click)=" goToMenu(restau.key)">==Menu==></a>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
 
+        </div>
 
-	            </div>
-	        </div>
-	        <div class='card' id='stats-card'>
-	            <div class='card-header d-flex justify-content-center' id='stats-card-header'>
-	                <h5>Command Stats</h5>
-	            </div>
-	            <div class="card-body d-flex justify-content-center" id='stats-card-body'>
-	               
+      </div>
+    </section><!-- End Chefs Section -->
 
+    <section id="chefs" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
+      <div class="container" data-aos="fade-up">
+ <div class="section-title">
+          <h2>Orders</h2>
+          <p>Check Your orders </p>
+        </div>
+  
+                <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr class="nouveau">
+                            <!--<th class="text-center">#</th>-->
+                            <th>Restaurant Name</th>
+                            <th>Dishs</th>
+                            <th>Status</th>
+                            <th class="text-right">Salary</th>
+                            <th class="text-right">Actions</th>
+                            <th class="text-center">Give your feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="nouv" *ngFor="let order of orders">
+                            <!--<td class="text-center">1</td>-->
+                            <td>{{order.restauName}}</td>
+                            <td>{{order.orderList}}</td>
+                            <td><strong  *ngIf="order.status=='not confirmed'" style="color: rgb(255, 0, 0);">{{order.status}}</strong>
+                              <strong  *ngIf="order.status=='confirmed'" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
+                            
+                            </td>
+                            <td class="text-right">€ 99,225</td>
+                            <td class="td-actions text-right">
+                                
+                                <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title=""  style="height: 30px;" *ngIf="order.status=='not confirmed'" (click)=" editOrder(order.idRestau)">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                                
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" style="height: 30px;" *ngIf="order.status=='not confirmed'" (click)="cancelOrder(order.idRestau)">
+                                       <i class="material-icons">close</i>
+                                </button>
 
+                               
+                              
+                            </td>
+                            <td class="td-actions text-center">
+                              <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 70px;height: 40px;" (click)="setOrderAsDone(order.idRestau)" [disabled]="order.orderStatus!='on delivery'">
+                                done
+                              </button>                          
+                              
+                          </td>
+                        </tr>
+                
+                  
+                     
+                  
+                    </tbody>
+                </table>
+                </div>
 
+              
 
-
-
-	            </div>
-	        </div>
-	    </div>
-
-	    <div class='row p-1'>
-	        <div class='col'>
-	            <div class='card' id='tab-card'>
-        	        <div class='card-header' id='tab-card-header'>
-        	            <h5>Project Status</h5>
-        	        </div>
-        	        <div class='card-body' id='tab-card-header'>
-        	            <div id='table'></div>
-        	        </div>
-        	    </div>
-	        </div>
-    	</div>
+            </div>
+          </section>
+<!--finished orders-->
+          <section id="chefs" class="chefs" style="margin-top: -150px; margin-bottom: 150px;margin-left: -200px;" >
+            <div class="container" data-aos="fade-up">
+       <div class="section-title">
+                <h2>Orders</h2>
+                <p>Check Your previous orders </p>
+              </div>
         
-	</div>
-</div>
+                      <div class="table-responsive">
+                      <table class="table">
+                          <thead>
+                              <tr class="nouveau">
+                                  <!--<th class="text-center">#</th>-->
+                                  <th>Restaurant Name</th>
+                                  <th>Dishs</th>
+                                  <th>Status</th>
+                                  <th class="text-right">Salary</th>
+                               
+                                  <th class="text-center">Give your feedback</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr class="nouv" *ngFor="let order of finishedOrders">
+                                  <!--<td class="text-center">1</td>-->
+                                  <td style="font-size:large;">{{order.restauName}}</td>
+                                  <td>{{order.orders}}</td>
+                                  <td>
+                                    <strong  *ngIf="order.status=='done'" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
+                                  
+                                  </td>
+                                  <td class="text-right">€ 99,225</td>
+                          
+                                  <td class="td-actions text-center">
+                                               <p *ngIf="order.feedback !=null" style="font-size:large;">{{order.feedback}}</p>             
+                                    <button *ngIf="order.feedback ==null" type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 70px;height: 40px;" (click)="giveFeedback(order.idRestau,order.key)">
+                                      Feedback
+                                    </button>
+                                </td>
+                              </tr>
+                      
+                        
+                           
+                        
+                          </tbody>
+                      </table>
+                      </div>
+      
+                    
+      
+                  </div>
+                </section>
 
-<div class="modal fade" id="status-modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content" id='status-modal-content'>
-      <div class="modal-header d-flex justify-content-center" id='status-modal-header'>
-      </div>
-      <div class="modal-body" id='status-modal-body'>
-      </div>
-      <div class="modal-footer" id='status-modal-footer'>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id='status-modal-close'>Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<main>
-    <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
-        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
-            
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span> <span class="float-end price-hp">12354.00€</span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                    </div>
-                </div>
-            </div>
-           
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/notebook-laptop-png-images-you-can-download-mashtrelo-14.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-success">12354.00€</span> <span class="float-end"><a href="#">Example</a></span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="d-grid gap-2 my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/download-laptop-notebook-png-image-png-image-pngimg-2.png" class="card-img-top" alt="...">
-                    <div class="label-top shadow-sm">Asus Rog</div>
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-success">12354.00€</span> <span class="float-end"><a href="#" class="small text-muted">Reviews</a></span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                        <div class="clearfix mb-1"> <span class="float-start"><i class="far fa-question-circle"></i></span> <span class="float-end"><i class="fas fa-plus"></i></span> </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card h-100 shadow-sm"> <img src="https://www.freepnglogos.com/uploads/notebook-png/notebook-laptop-png-images-you-can-download-mashtrelo-14.png" class="card-img-top" alt="...">
-                    <div class="label-top shadow-sm">DELL</div>
-                    <div class="card-body">
-                        <div class="clearfix mb-3"> <span class="float-start price-hp">12354.00€</span> <span class="float-end"><a class="text-muted small" href="#">Reviews</a></span> </div>
-                        <h5 class="card-title">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam quidem eaque ut eveniet aut quis rerum. Asperiores accusamus harum ducimus velit odit ut. Saepe, iste optio laudantium sed aliquam sequi.</h5>
-                        <div class="text-center my-4"> <a href="#" class="btn btn-warning">Check offer</a> </div>
-                        <div class="clearfix mb-1"> <span class="float-start"><i class="far fa-question-circle"></i></span> <span class="float-end"><i class="fas fa-plus"></i></span> </div>
-                    </div>
-                </div>
-            </div>
+          <section id="chefs" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
+            <div class="container" data-aos="fade-up">
+       <div class="section-title">
+                <h2>Orders in general</h2>
+                <p>Volunteer to deliver the order from Restaurant </p>
+              </div>
         
-        </div>
-    </div>
-</main>
-
--->
- <!-- ======= Why Us Section ======= -->
- <section id="why-us" class="why-us">
-    <div class="container" data-aos="fade-up" >
-
-      <div class="section-title" >
-        <h2>Why Us</h2>
-        <p style="color: black;">Why Choose Our Restaurant</p>
-      </div>
-
-      <div class="row" >
-
-        <div class="col-lg-4" >
-          <div class="box" data-aos="zoom-in" data-aos-delay="100"style="background-color: black;">
-            <span>01</span>
-            <h4>Lorem Ipsum</h4>
-            <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 mt-4 mt-lg-0">
-          <div class="box" data-aos="zoom-in" data-aos-delay="200">
-            <span>02</span>
-            <h4>Repellat Nihil</h4>
-            <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 mt-4 mt-lg-0">
-          <div class="box" data-aos="zoom-in" data-aos-delay="300">
-            <span>03</span>
-            <h4> Ad ad velit qui</h4>
-            <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Why Us Section -->
+                      <div class="table-responsive">
+                      <table class="table">
+                          <thead>
+                              <tr class="nouveau">
+                                  <!--<th class="text-center">#</th>-->
+                                  <th>Restaurant Name</th>
+                                  <th>Address</th>
+                                  <th>Phone number</th>
+                                  <th class="text-right">Status</th>
+                          
+                                  <th class="text-center">Volunteer for delivery if possible</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr class="nouv">
+                                  <!--<td class="text-center">1</td>-->
+                                  <td>Andrew Mike</td>
+                                  <td>Develop</td>
+                                  <td>2013</td>
+                                  <td class="text-right">€ 99,225</td>
+                               
+                                  <td class="td-actions text-center">                                   
+                                    <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 70px;height: 40px;">
+                                      volunteer
+                                    </button>
+                                </td>
+                              </tr>
+                      
+                        
+                           
+                        
+                          </tbody>
+                      </table>
+                      </div>
+      
+                    
+      
+                  </div>
+                </section>
+      
