@@ -12,8 +12,8 @@ export class GiveFeedbackProxymianComponent implements OnInit {
   constructor(private restauService:RestaurantService,private router : Router, private route: ActivatedRoute)
    {
 
-this.finishedOrderIdOrder=localStorage.getItem('finishedOrderKey')
-this.finishedOrderIdRestau=localStorage.getItem('finishedOrderIdRestau')
+this.finishedOrderIdOrder=sessionStorage.getItem('finishedOrderKey')
+this.finishedOrderIdRestau=sessionStorage.getItem('finishedOrderIdRestau')
    }
 finishedOrderIdRestau:any;
 finishedOrderIdOrder   

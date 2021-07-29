@@ -34,4 +34,9 @@ export class SuperAdminService {
 
   //  return this.adminRef.push(admin);
    }
+   getInfoAdminById(idUser:any)//returns all the informations about this restaurant
+  {
+  console.log(idUser)
+  return this.db.list('/admins', ref => ref.orderByKey().equalTo(idUser));
+  }
 }

@@ -14,7 +14,7 @@ export class EditRestauInfosComponent implements OnInit {
 
   constructor(public restService: RestaurantService ,private router : Router, private route: ActivatedRoute) { 
     // this.restau = new  Restaurant();
-    this.idUser=localStorage.getItem('userId');
+    this.idUser=sessionStorage.getItem('userId');
    }
    idUser:any;
    restau:  any={};

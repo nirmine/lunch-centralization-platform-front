@@ -10,8 +10,11 @@
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  background: white;
+ /* background: white;*/
+ 
+ 
   color: #fff;
+  
 }
 
 a {

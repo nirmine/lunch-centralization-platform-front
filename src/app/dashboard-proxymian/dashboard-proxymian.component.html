@@ -32,7 +32,7 @@
       </div>
     </section><!-- End Chefs Section -->
 
-    <section id="chefs" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
+    <section id="yorder" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
       <div class="container" data-aos="fade-up">
  <div class="section-title">
           <h2>Orders</h2>
@@ -95,7 +95,7 @@
             </div>
           </section>
 <!--finished orders-->
-          <section id="chefs" class="chefs" style="margin-top: -150px; margin-bottom: 150px;margin-left: -200px;" >
+          <section id="feed" class="chefs" style="margin-top: -150px; margin-bottom: 150px;margin-left: -200px;" >
             <div class="container" data-aos="fade-up">
        <div class="section-title">
                 <h2>Orders</h2>
@@ -146,7 +146,7 @@
                   </div>
                 </section>
 
-          <section id="chefs" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
+          <section id="delivery" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
             <div class="container" data-aos="fade-up">
        <div class="section-title">
                 <h2>Orders in general</h2>
@@ -161,21 +161,21 @@
                                   <th>Restaurant Name</th>
                                   <th>Address</th>
                                   <th>Phone number</th>
-                                  <th class="text-right">Status</th>
+                                  <th class="text-right">Total Order</th>
                           
                                   <th class="text-center">Volunteer for delivery if possible</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr class="nouv">
+                              <tr class="nouv" *ngFor="let order of  toDeliverOrders">
                                   <!--<td class="text-center">1</td>-->
-                                  <td>Andrew Mike</td>
-                                  <td>Develop</td>
-                                  <td>2013</td>
-                                  <td class="text-right">€ 99,225</td>
+                                  <td>{{order.restauName}}</td>
+                                  <td>{{order.restauAddress}}</td>
+                                  <td>{{order.restauPhone}}</td>
+                                  <td class="text-right"><p *ngFor="let o of order.orders">{{o.userName}}: {{o.orderList}}</p></td>
                                
                                   <td class="td-actions text-center">                                   
-                                    <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 70px;height: 40px;">
+                                    <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 70px;height: 40px;" (click)="volunteerForDelivery(order.idRestau)" [disabled]="order.orderDelivery !='restaurant' && order.orderDelivery !='not restaurant'">
                                       volunteer
                                     </button>
                                 </td>

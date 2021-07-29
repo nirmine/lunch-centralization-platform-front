@@ -26,6 +26,10 @@ import { GiveFeedbackProxymianComponent } from './give-feedback-proxymian/give-f
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { AddRestaurantAdminComponent } from './add-restaurant-admin/add-restaurant-admin.component';
 import { AddAdminSuperComponent } from './add-admin-super/add-admin-super.component';
+import { SigninAdminComponent } from './signin-admin/signin-admin.component';
+import { SigninRestauComponent } from './signin-restau/signin-restau.component';
+import { DashboardRestauComponent } from './dashboard-restau/dashboard-restau.component';
+import { DashboardSuperComponent } from './dashboard-super/dashboard-super.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +50,10 @@ import { AddAdminSuperComponent } from './add-admin-super/add-admin-super.compon
     DashboardAdminComponent,
     AddRestaurantAdminComponent,
     AddAdminSuperComponent,
+    SigninAdminComponent,
+    SigninRestauComponent,
+    DashboardRestauComponent,
+    DashboardSuperComponent,
    
 
   ],

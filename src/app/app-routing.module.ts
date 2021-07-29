@@ -1,3 +1,5 @@
+import { DashboardRestauComponent } from './dashboard-restau/dashboard-restau.component';
+import { AuthGuard } from './services/auth.guard';
 import { AddRestaurantAdminComponent } from './add-restaurant-admin/add-restaurant-admin.component';
 import { GiveFeedbackProxymianComponent } from './give-feedback-proxymian/give-feedback-proxymian.component';
 import { ValidateOrderProxymianComponent } from './validate-order-proxymian/validate-order-proxymian.component';
@@ -13,20 +15,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DashboardAdminComponent } from './dashboard-admin/dashboard-admin.component';
 import { AddAdminSuperComponent } from './add-admin-super/add-admin-super.component';
+import { SigninRestauComponent } from './signin-restau/signin-restau.component';
+import { SigninAdminComponent } from './signin-admin/signin-admin.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: 'home', component: HomeComponent },
   { path: 'signInUser', component: SigninUserComponent },
-  { path: 'addNewDish', component: AddDishComponent },
-  { path: 'dashboard', component: DashboardProxymianComponent },
-   { path: 'RestauMenu', component: MenuProxymianComponent },
-   { path: 'editprofilRestau', component: EditRestauInfosComponent },
-   { path: 'validateOrder', component: ValidateOrderProxymianComponent},
-   { path: 'feedback', component: GiveFeedbackProxymianComponent},
-   { path: 'dashboard-admin', component: DashboardAdminComponent},
-   { path: 'addRestaurant-admin', component: AddRestaurantAdminComponent},
-   { path: 'addNewAdmin', component: AddAdminSuperComponent },
+  { path: 'addNewDish', component: AddDishComponent,canActivate:[AuthGuard] },
+  { path: 'dashboard', component: DashboardProxymianComponent,canActivate:[AuthGuard] },
+   { path: 'RestauMenu', component: MenuProxymianComponent,canActivate:[AuthGuard] },
+   { path: 'editprofilRestau', component: EditRestauInfosComponent ,canActivate:[AuthGuard]},
+   { path: 'validateOrder', component: ValidateOrderProxymianComponent,canActivate:[AuthGuard]},
+   { path: 'feedback', component: GiveFeedbackProxymianComponent,canActivate:[AuthGuard]},
+   { path: 'dashboard-admin', component: DashboardAdminComponent,canActivate:[AuthGuard]},
+   { path: 'addRestaurant-admin', component: AddRestaurantAdminComponent,canActivate:[AuthGuard]},
+   { path: 'addNewAdmin', component: AddAdminSuperComponent ,canActivate:[AuthGuard]},
+   { path: 'signInRestau', component: SigninRestauComponent },
+   { path: 'signInAdmin', component: SigninAdminComponent },
+   { path: 'dashboard-restau', component: DashboardRestauComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

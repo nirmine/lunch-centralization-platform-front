@@ -191,18 +191,22 @@ ens[idDish]=nbrPieces;
   return ref.child("status").set("confirmed");
    
 }
-
+setOrderOfUserStatus(idRestau:any,idUser:any,idDish:any,status:any)
+{
+  let ref=this.db.database.ref(this.ordersPath+'/'+idRestau+'/'+idUser);
+  return ref.child("status").set("confirmed");
+}
 deleteOrderedDish(idRestau:any,idUser:any,idDish:any): Promise<void> {
   let menuRef=this.db.list(this.ordersPath+'/'+idRestau+'/'+idUser);
   return menuRef.remove(idDish);
 }
-getOrdersOfUser(idUser:any)
+getOrdersOfUser(idUser:any)//returns all the orders of all restaurants
 {
 
   return this.db.list('/orders', ref => ref.orderByKey());
 }
 
-getOrderOfUserByIdRestau(idRestau:any,idUser:any)
+getOrderOfUserByIdRestau(idRestau:any,idUser:any)//returns the order of a user in a certain restaurant
 {
 
   return this.db.list('/orders/'+idRestau, ref => ref.orderByKey().equalTo(idUser));
@@ -250,12 +254,50 @@ setFeedbackAboutOrder(restauKey:any,key:any,feed:any)
 }
 getInfoUserById(idUser:any)//returns all the informations about this restaurant
 {
+ // console.log(idUser)
   return this.db.list('/users', ref => ref.orderByKey().equalTo(idUser));
 }
 
-updateOrderStatus(idRestau:any,status:any)
+updateOrderStatus(idRestau:any,status:any)//changes the status of a whole order of a restau
 {
   let ref=this.db.database.ref(this.ordersPath+'/'+idRestau);
   return ref.child("status").set(status);
 }
+
+setDelivery(idRestau:any,volunteer:any)
+{
+ 
+  let reference=this.db.database.ref(this.ordersPath+'/'+idRestau);
+  
+       reference.child("delivery").set(volunteer);
+     
+}
+
+getInfoUser(idUser,ens:any)
+  {
+    this.getInfoUserById(idUser).snapshotChanges().subscribe(infos => {
+     //console.log(infos[0].payload.val()['name'])
+      //ens.push(infos[0].payload.val()['name'])
+       ens["userName"]=infos[0].payload.val()['name']
+       ens["userPhone"]=infos[0].payload.val()['phone']
+        }, (error) => {
+          console.log(error);
+        });
+  }
+
+getInfosDish(idRestau,idDish:any)
+{ //console.log(idRestau)
+  return this.db.list('/restaurants/'+idRestau+'/menu', ref => ref.orderByKey().equalTo(idDish))
+}
+/*getInfosDishById(idRestau,idDish:any,ens:any)
+{ /*console.log(idRestau)
+  console.log(idDish)
+ this.getInfosDish(idRestau,idDish).snapshotChanges().subscribe(infos => {
+     // console.log(infos[0].payload.val())
+    ens["dishPrice"]=infos[0].payload.val()['price']
+   console.log(ens)
+     }, (error) => {
+       console.log(error);
+     });
+}*/
 }

@@ -1,0 +1,61 @@
+<section id="yorder" class="chefs" style="margin-top: 80px; ;margin-left: -200px;" >
+    <div class="container" data-aos="fade-up">
+<div class="section-title">
+        <h2>commandes</h2>
+        <p>Commandes d'aujourd'hui </p>
+      </div>
+
+              <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr class="nouveau">
+                          <!--<th class="text-center">#</th>-->
+                          <th>Nom du client</th>
+                          <th>Téléphone</th>
+                          <th>Plats</th>
+                          <th class="text-right">Nombre de piéces</th>
+                          <th class="text-right">Actions</th>
+                          <th class="text-center">Prix unitaire</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="nouv" *ngFor="let order of orderList">
+                          <!--<td class="text-center">1</td>-->
+                          <td>{{order.userName}}</td>
+                          <td>{{order.userPhone}}</td>
+                          <td>
+                            {{order.name}}
+                          </td>
+                          <td class="text-right">{{order.nbr}}</td>
+                          <td class="td-actions text-right">
+                              
+                              <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title=""  style="height: 30px;" >
+                                  <i class="material-icons">edit</i>
+                              </button>
+                              
+                              <button type="button" rel="tooltip" class="btn btn-danger btn-just-icon btn-sm" data-original-title="" title="" style="height: 30px;" >
+                                     <i class="material-icons">close</i>
+                              </button>
+
+                             
+                            
+                          </td>
+                          <td class="td-actions text-center">
+                                          {{order['price']}}           
+                            
+                        </td>
+                      </tr>
+              
+                
+                   
+                
+                  </tbody>
+              </table>
+              <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 100px;height: 40px;margin-left: 20px;" (click)="setOrderStatus('on delivery')">en livraison</button>
+              <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 100px;height: 40px;margin-left: 20px;" (click)="setOrderStatus('ready')"> prête</button>
+              </div>
+
+            
+
+          </div>
+        </section>
