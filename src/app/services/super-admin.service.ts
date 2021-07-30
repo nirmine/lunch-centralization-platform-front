@@ -7,6 +7,7 @@ import { Admin } from '../models/admin';
 export class SuperAdminService {
 
   private adminsPath = '/admins';
+  private usersPath = '/users';
   adminRef: AngularFireList<Admin> ;
   constructor(public db: AngularFireDatabase) 
   { 
@@ -38,5 +39,19 @@ export class SuperAdminService {
   {
   console.log(idUser)
   return this.db.list('/admins', ref => ref.orderByKey().equalTo(idUser));
+  }
+  addAdmin(idUser:any)
+  {
+    let refe=this.db.database.ref(this. adminsPath);
+    refe.child(idUser).set(idUser);
+  }
+  getAllUsers()
+  {
+    return this.db.list('/users', ref => ref.orderByKey());
+  }
+  setStatus(idUser:any,status:any)
+  {
+    let refe=this.db.database.ref(this.usersPath+'/'+idUser);
+    refe.child("role").set(status);
   }
 }

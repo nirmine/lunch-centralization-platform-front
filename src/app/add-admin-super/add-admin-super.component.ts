@@ -12,10 +12,42 @@ import { Admin } from '../models/admin';
 export class AddAdminSuperComponent implements OnInit {
 
 
-  constructor(private superAdminService: SuperAdminService,private router : Router, private route: ActivatedRoute) { }
+  constructor(private superAdminService: SuperAdminService,private router : Router, private route: ActivatedRoute) 
+  {
+this.superAdminService.getAllUsers().snapshotChanges().subscribe(res=>{
+res.forEach(element => {
+  let ens={}
+  //console.log(element.key):idUser
+  ens['id']=element.key
+  ens['name']=element.payload.val()['name']
+  ens['phone']=element.payload.val()['phone']
+  ens['email']=element.payload.val()['email']
+  ens['role']=element.payload.val()['role']
+  if(element.payload.val()['role']!='super')
+ 
+  this.users.push(ens)
+  console.log(  this.users)
+});
+
+})
+
+
+   }
 
   admin:Admin=new Admin();
+  users:any=[];
   ngOnInit(): void {
+  }
+  setUserStatus(idUser:any,status:any)
+  {
+    //console.log(idUser)
+     this.superAdminService.setStatus(idUser,status)
+     if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
   }
   save() {
     

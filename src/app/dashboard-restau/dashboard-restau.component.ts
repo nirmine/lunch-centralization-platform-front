@@ -10,6 +10,7 @@ import { RestaurantService } from '../services/restaurant.service';
 export class DashboardRestauComponent implements OnInit {
   restauId:any;
   orderList=[]
+  orderListTest=[]
   orderStatus:any;
   delivery:any;
   constructor(private restauService:RestaurantService,private router : Router, private route: ActivatedRoute)
@@ -46,7 +47,7 @@ export class DashboardRestauComponent implements OnInit {
           for(x in  elt)
           { 
             
-            if(x!="status")//dish name
+            if(x!="status" && x!="note" && x!="total")//dish name
             {
            //   console.log(x)
             el={};
@@ -64,7 +65,8 @@ export class DashboardRestauComponent implements OnInit {
               }, (error) => {
                 console.log(error);
               });
-             // el.price=ee[x]
+           
+            
               this.orderList.push(el)
             
            // console.log(ee)
@@ -108,7 +110,7 @@ export class DashboardRestauComponent implements OnInit {
     }*/
   setOrderStatus(status:any)
   {
-    //this.restauService.updateOrderStatus(this.restauId,status)
+    this.restauService.updateOrderStatus(this.restauId,status)
     this.orderList.forEach(element => {
       console.log(element.name)
     });

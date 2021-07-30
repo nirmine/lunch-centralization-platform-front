@@ -15,8 +15,13 @@ export class ValidateOrderProxymianComponent implements OnInit {
   constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
     this.idRestau=localStorage.getItem('restauId');
     this.userId=localStorage.getItem('userId');
+
+    
+
+
+
    // this.total="0";
-    console.log(this.idRestau)
+  //console.log(this.idRestau)
    this.resService.getOrdersByIdRestau(this.idRestau).snapshotChanges().subscribe(order => {
  
     let e;
@@ -27,7 +32,7 @@ export class ValidateOrderProxymianComponent implements OnInit {
     /*let s={};
     s["somme"]=0;
     this.orderList.push(s);*/
-  
+    
  // console.log(this.idRestau)
     for(e in order)
     {
@@ -37,11 +42,11 @@ export class ValidateOrderProxymianComponent implements OnInit {
         elt=order[e].payload.val();
         for(x in  elt)
         {
-          if(x!="status")
+          if(x!="status" && x!="note" && x!="total")
           {
           el={};
           el.name=x;//dish's name
-       
+         this.resService.getImageSrc(this.idRestau,x,el)
           el.nbr=elt[x]//how many times this dish is ordered by this user
           this.getDishInfo(x,el);
          
@@ -49,9 +54,14 @@ export class ValidateOrderProxymianComponent implements OnInit {
           this.orderList.push(el)
           //console.log(this.orderList)
         }
+        else
+        {
+          if( x=="note")
+          this.note=elt[x]
+        }
         }
       }
-      //console.log(this.orderList)
+      console.log(this.orderList)
     }  
   }, (error) => {
     console.log(error);
@@ -130,15 +140,16 @@ export class ValidateOrderProxymianComponent implements OnInit {
         
   }
   total:number=0;
+  note:any="";
   confirmOrder()
   {
     let x;
     for(x in this.orderList)
     {
-      this.resService.updateDishNumber(this.idRestau,this.userId,this.orderList[x].name,this.orderList[x].nbr);
+      this.resService.updateDishNumber(this.idRestau,this.userId,this.orderList[x].name,this.orderList[x].nbr,this.note,this.total);
     }
   
-
+this.router.navigate(['dashboard'])
   }
   deleteOrderedDish(idDish:any)
   {
@@ -167,4 +178,5 @@ export class ValidateOrderProxymianComponent implements OnInit {
   
   }
 
+  map = new Map();
 }

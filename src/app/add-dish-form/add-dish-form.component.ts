@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Menu } from '../models/menu';
 import { RestaurantService } from '../services/restaurant.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-dish-form',
@@ -11,11 +12,11 @@ import { RestaurantService } from '../services/restaurant.service';
 })
 export class AddDishFormComponent implements OnInit {
 
-  constructor(public restService: RestaurantService) { 
+  constructor(public restService: RestaurantService,private router : Router, private route: ActivatedRoute) { 
     this.menu = new Menu();
-   console.log(localStorage.getItem('keyRestau'))
-   this.Restaukey=localStorage.getItem('keyRestau');
-   this.userId=localStorage.getItem('userId');
+   console.log(sessionStorage.getItem('keyRestau'))
+   this.Restaukey=sessionStorage.getItem('keyRestau');
+   this.userId=sessionStorage.getItem('userId');
    console.log(this.userId);
   }
   Restaukey:any;
@@ -52,10 +53,7 @@ export class AddDishFormComponent implements OnInit {
     console.log("done")
   }
 
-  test()
-  {
-
-  }
+ 
   
   currentFileUpload: FileUpload;
   percentage: number;
@@ -71,15 +69,23 @@ export class AddDishFormComponent implements OnInit {
     this.restService.pushFileToStorage(this.userId,this.menu.name,this.currentFileUpload).subscribe(
       percentage => {
         this.percentage = Math.round(percentage);
-        if(this.percentage==100)
-          {
-            console.log("100");
-            this.reset();
-          }
+        
       },
       error => {
         console.log(error);
       }
     );
+    this.restService.getDishImg(this.userId,this.menu.name).snapshotChanges().subscribe(infos => {
+      console.log(infos)
+     if(infos.length!=0)
+      //this.router.navigate(['addNewDish']);
+      if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
+        localStorage.setItem('firstReload', 'false');
+        window.location.reload();
+      } else {
+        localStorage.setItem('firstReload', 'true');
+      }
+       // this.reset();
+    });
   }
 }

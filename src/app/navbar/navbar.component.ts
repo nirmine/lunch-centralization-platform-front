@@ -43,6 +43,7 @@ export class NavbarComponent implements OnInit {
       case 'admin':  this.router.navigate(['dashboard-admin']); break;
       case 'normal':  this.router.navigate(['dashboard']); break;
       case 'restau':  this.router.navigate(['dashboard-restau']); break;
+      case 'super':  this.router.navigate(['dashboard-super']); break;
       
       default:
         this.router.navigate(['home']);

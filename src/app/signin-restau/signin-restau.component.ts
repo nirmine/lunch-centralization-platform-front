@@ -16,6 +16,7 @@ export class SigninRestauComponent implements OnInit {
   erreur = true;
   user:any={};
   restauName="";
+  restauAddress:any;
   //userPwd:any;
   //userRole:any;
   ngOnInit(): void {
@@ -46,7 +47,8 @@ export class SigninRestauComponent implements OnInit {
        
          this.restauName=infos[0].payload.val()['name']
          //this.userPwd=infos[0].payload.val()['password']
- 
+         // this.restauEntry=infos[0].payload.val()['entry']
+          this.restauAddress=infos[0].payload.val()['address']
          if (form.value.password == infos[0].payload.val()['password'])//if (this.user.password === this.userPwd)
          {
            sessionStorage.setItem('isConnected', 'true');
@@ -54,8 +56,19 @@ export class SigninRestauComponent implements OnInit {
           
           sessionStorage.setItem('role', 'restau');
           sessionStorage.setItem('userId', this.user.id);
+         
+          console.log(this.restauAddress)
+          if(this.restauAddress==undefined)
+          {
+            this.router.navigate(['editprofilRestau']);
+             
+            //console.log(this.restauEntry)
+          } 
+          else
           this.router.navigate(['dashboard-restau']);
-          } else 
+          
+        
+        } else 
           {
           this.erreur = false;
           }

@@ -3,7 +3,7 @@
 
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-cente">
+  <header id="header" class="fixed-top d-flex align-items-cente"  [ngStyle]="{'top':(isConnected=='true') ? '0px' : '40px' }">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
       
       <h1 class="logo me-auto me-lg-0"><a href="index.html">Restaurantly</a></h1>
@@ -16,13 +16,13 @@
           <li><a class="nav-link scrollto active" *ngIf="isConnected=='true'" (click)="showDash()">dashboard</a></li>
           <li><a class="nav-link scrollto" href="/home#about" *ngIf="isConnected=='false' || isConnected==null">About</a></li>
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='admin' )" href="/addRestaurant-admin">new Restaurant</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/addNewAdmin">new admin</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/editprofilRestau">edit profile</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/addNewDish">new Dish</a></li>
+          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/addNewAdmin">Admins</a></li>
+          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/dashboard-admin">Orders</a></li>
+          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/addNewDish">Nouveau plat</a></li>
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='normal' )" href="/dashboard#yorder">Your Order</a></li>
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='normal' )" href="/dashboard#delivery">Delivery-Volunteer</a></li>
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='normal' )" href="/dashboard#feed">Feedback</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/editprofilRestau">edit profile</a></li>
+          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/editprofilRestau">Modifier infos</a></li>
           <li><a class="nav-link scrollto" href="/home#testimonials" *ngIf="isConnected=='false' || isConnected==null">Testimonials</a></li>
           
            <!--<li><a class="nav-link scrollto" href="#footer" >Contacts</a></li>

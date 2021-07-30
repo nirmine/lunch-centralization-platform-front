@@ -1,9 +1,9 @@
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container" style="margin-top: 150px;margin-left: 20px;margin-bottom: 100px;">
+<!--<div class="container" style="margin-top: 150px;margin-left: 20px;margin-bottom: 100px;">
   <form class="form-horizontal" role="form" (ngSubmit)="onSubmit()">
     <fieldset>
       <legend><h1>Edit your profil's Infos:</h1></legend>
@@ -47,7 +47,7 @@
                 <option value="14">2014</option>
               
               </select>
-            </div>-->
+            </div>
           </div>
         </div>
       </div>
@@ -78,4 +78,83 @@
       </div>
     </fieldset>
   </form>
+</div>
+
+-->
+
+
+
+
+
+<div style="margin-top: 180px; margin-bottom: 150px;height: 50%;width: 50%;margin-left: 7%;">
+
+  <h2 style="color: black;">Saisir les infos de votre profile</h2>
+  <div style="margin-left: 5%;">
+    <form (ngSubmit)="onSubmit()"> 
+      <!-- First name -->   
+      <div class="form-group">
+        <label for="nom">Nom du restaurant</label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter the restaurant's Name" required [(ngModel)]="restau.name" #name="ngModel">
+
+      </div>
+
+      <div [hidden]="name.valid || name.pristine">The restaurant's name is required </div>
+
+      <div class="form-group">
+        <label for="nom">Adresse</label>
+        <input type="text" class="form-control" name="address" id="address" placeholder="Enter your address" required [(ngModel)]="restau.address" #address="ngModel">
+
+      </div>
+
+      <div [hidden]="address.valid || address.pristine">The restaurant's address is required </div>
+      <!-- Last name -->
+      <div class="form-group">
+          <label for="composition">Phone Number</label>
+          <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number"required [(ngModel)]="restau.phoneNumber" #phoneNumber="ngModel">
+          
+      </div>  
+      <div [hidden]="phoneNumber.valid || phoneNumber.pristine">The restaurant's phone number is required </div>
+   
+      <div class="form-group">
+        <label for="composition">Email</label>
+        <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email" [(ngModel)]="restau.email" #email="ngModel">
+    </div>  
+    
+
+    
+  <div class="form-group">
+    <label for="composition">Livraison</label>
+    
+          <select class="browser-default " name="delivery" id="delivery" required [(ngModel)]="restau.delivery" #delivery="ngModel">
+            
+         
+           
+            <option value="yes"  class="form-control" >oui</option>
+            <option value="no" selected>non</option>
+
+
+          </select>
+ 
+    </div>
+    <div [hidden]="delivery.valid || delivery.pristine">Please let us know if the delivery is on your charge </div>
+  
+    <div class="form-group">
+      <label for="composition">Prix livraison</label>
+      <input type="number" class="form-control" name="price" id="price" placeholder="Si oui,entrez le prix de la livraison" [(ngModel)]="restau.price" #price="ngModel">
+  </div> 
+    <div class="form-group">
+    <div *ngIf="currentFileUpload" class="progress">
+      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
+    </div>
+    <label for="composition">Image du restau</label>
+    
+    <input type="file" (change)="selectFile($event)" class="form-control">
+  </div>  
+
+
+      <button type="submit" class="btn btn-success" style="margin-top: 50px;background-color: #cda45e;">Valider</button>
+    </form>
+  </div>
+
+
 </div>

@@ -24,7 +24,7 @@
                         <tr>
                             <th class="text-center"></th>
                             <th>Name</th>
-                            <th class="th-description">Color</th>
+                            <th class="th-description"></th>
                             <th class="th-description text-right">Size</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Qty</th>
@@ -36,7 +36,7 @@
                         <tr *ngFor="let dish of orderList">
                             <td>
                                 <div class="img-container">
-                                    <img src="https://cdn.shopify.com/s/files/1/0128/9452/products/apparel_outerwear_tsm_fleece-varsity_black_01_1024x1024.jpg?v=1522083098" alt="...">
+                                    <img src="{{dish.url}}" alt="No image found">
                                 </div>
                             </td>
                             <td class="td-name">
@@ -44,7 +44,7 @@
                                 <br><small>{{dish.composition}}</small>
                             </td>
                             <td>
-                                Red
+                              
                             </td>
                             <td class="text-center">
                                 M
@@ -66,7 +66,7 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr>
+                       <tr>
                           <td colspan="3">
                           </td>
                           <td class="td-total">
@@ -78,7 +78,21 @@
                           <td colspan="3" class="text-right"> <button type="button" class="btn btn-info btn-round"(click)=" confirmOrder()">Complete Purchase <i class="material-icons">keyboard_arrow_right</i></button></td>
   
                       </tr>
+
+                      <tr>
+                        <td colspan="4">
+                            Note <br>
+                             <textarea style="height: 100px;width: 300px;" [(ngModel)]="note" placeholder="Enter your notes about the food ordered"></textarea> 
+                        </td>
+                      
+                       
+                        <td colspan="4" class="text-right"> </td>
+
+                    </tr>
+                      
                     </tbody>
+                   
+                    
                 </table>
                 </div>
     

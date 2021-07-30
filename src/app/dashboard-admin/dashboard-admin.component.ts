@@ -11,7 +11,14 @@ export class DashboardAdminComponent implements OnInit {
 
   constructor(private restauService:RestaurantService,private router : Router, private route: ActivatedRoute)
   { 
-      this.getOrders();
+    if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
+    
+    this.getOrders();
 
   }
 

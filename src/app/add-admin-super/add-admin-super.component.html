@@ -1,1 +1,62 @@
-<p>add-admin-super works!</p>
+
+<section id="yorder" class="chefs" style="margin-top: 80px; ;margin-left: -200px;" >
+    <div class="container" data-aos="fade-up">
+<div class="section-title">
+        
+        <p>Users</p>
+        <h2>click to choose an admin</h2>
+      </div>
+
+              <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr class="nouveau">
+                          <!--<th class="text-center">#</th>-->
+                          <th>User Name</th>
+                          <th>Phone number</th>
+                          <th>Email</th>
+                          <th class="text-right">Role</th>
+                          <th class="text-right">Actions</th>
+                          <th class="text-center"></th>
+                      </tr>
+                  </thead>
+                  <tbody *ngIf="users!=[]">
+                      <tr class="nouv" *ngFor="let user of users" >
+                          <!--<td class="text-center">1</td>-->
+                          <td>{{user.name}}</td>
+                          <td>{{user.phone}}</td>
+                          <td>
+                            {{user.email}}
+                          </td>
+                          <td class="text-right"><p *ngIf="user.role!='admin'">{{user.role}}</p> <p style="color: rgb(99, 224, 26);" *ngIf="user.role=='admin'">admin</p>
+                           
+                        </td>
+                          <td class="td-actions text-right">
+                              
+                            <button type="button" class="btn btn-info btn-round" *ngIf="user.role!='admin'" (click)="setUserStatus(user['id'],'admin')" >Admin </button>   
+                            <button type="button" class="btn btn-info btn-round" *ngIf="user.role=='admin'" (click)="setUserStatus(user.id,'normal')">not admin </button>                       
+                          
+                        </td>
+                          <td class="td-actions text-center"> <button type="button"   class="btn btn-link"  >
+                            <i class="material-icons">close</i>
+                        </button>  </td>
+
+                      </tr>      
+                  </tbody>
+
+                  <tbody *ngIf="users==[]">
+                    <tr class="nouv" >
+                        <!--<td class="text-center">1</td>-->
+                        <td colspan="6" class="text-center">No users found</td>                       
+                    </tr>
+                </tbody>
+
+              </table>
+              
+              </div>
+
+            
+
+          </div>
+        </section>
+

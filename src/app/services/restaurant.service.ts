@@ -5,7 +5,7 @@ import { observable, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileUpload } from '../models/restaurant';
-import { finalize } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -93,7 +93,7 @@ createCustomer(restauKey:any,restau:any): any {
 
 private restauStoragePath = '/restaus';
 pushRestauImageToStorage(restauKey:any,fileUpload: FileUpload): any {
-  let filePath = `${this.restauStoragePath}/${fileUpload.file.name}`;
+  let filePath = `${this.restauStoragePath+'/'+restauKey}/${fileUpload.file.name}`;
   let storageRef = this.storage.ref(filePath);
   let uploadTask = this.storage.upload(filePath, fileUpload.file);
   uploadTask.snapshotChanges().pipe(
@@ -102,7 +102,8 @@ pushRestauImageToStorage(restauKey:any,fileUpload: FileUpload): any {
         console.log('File available at', downloadURL);
         fileUpload.url = downloadURL;
         fileUpload.name = fileUpload.file.name;
-        this.saveRestauImageData(restauKey,fileUpload);
+       // this.saveRestauImageData(restauKey,fileUpload);
+        this.db.list(this.restauPath+'/'+restauKey+'/img').push(fileUpload);
       });
     })
   ).subscribe();
@@ -179,7 +180,7 @@ getDishInfoById(idRestau:any,idDish:any)
   return this.db.list('/restaurants/'+idRestau+'/menu', ref => ref.orderByKey().equalTo(ch));
 }
 
-updateDishNumber(idRestau:any,idUser:any,idDish:any,nbrPieces:number)
+updateDishNumber(idRestau:any,idUser:any,idDish:any,nbrPieces:number,note:any,total:any)
 {
   /*let ref=this.db.database.ref(this.ordersPath+'/'+idRestau+'/'+idUser);
   ref.child(idDish).set(nbrPieces);*/
@@ -188,6 +189,8 @@ ens[idDish]=nbrPieces;
   let orderRef=this.db.list(this.ordersPath+'/'+idRestau);
      orderRef.update(idUser,ens);
      let ref=this.db.database.ref(this.ordersPath+'/'+idRestau+'/'+idUser);
+     ref.child("note").set(note);
+     ref.child("total").set(total);
   return ref.child("status").set("confirmed");
    
 }
@@ -252,7 +255,7 @@ setFeedbackAboutOrder(restauKey:any,key:any,feed:any)
   let ref=this.db.database.ref(this.finishedOrdersPath+'/'+restauKey+'/'+key);
   return ref.child("feedback").set(feed);
 }
-getInfoUserById(idUser:any)//returns all the informations about this restaurant
+getInfoUserById(idUser:any)//returns all the informations about this user
 {
  // console.log(idUser)
   return this.db.list('/users', ref => ref.orderByKey().equalTo(idUser));
@@ -300,4 +303,61 @@ getInfosDish(idRestau,idDish:any)
        console.log(error);
      });
 }*/
+
+getImageSrc(idRestau:any,idDish:any,ens:any)
+{
+  let url="";
+  let menu
+  let elt:any={};
+    let e:any={};
+    this.getMenusList(idRestau).snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(menus => {
+      menu = menus;
+   // console.log(menu)//[{},{},..]:the list of dishs
+  for (elt in menu) //0/1/2....
+  {
+   // console.log( elt)//this.menus[0]['img'][ elt['img']].url)
+  // console.log(menu[elt]['name'])
+    if(menu[elt]['name']==idDish)
+   {
+    for (e in menu[elt]['img']) //e=key of the image
+    {
+     // console.log(menus[elt]['img'][e].url) //: dish's url 
+      //console.log( this.menus[elt]['name']) : dish's name
+      //console.log(e)
+      //console.log(menu[elt]['img'][e].url)
+      ens['url']=menu[elt]['img'][e].url
+     }
+    }
+
+   }
+    
+    
+    }, (error) => {
+      console.log(error);
+    });   
+    
+}
+/*setRestauEntry(idRestau)
+{
+  let refe=this.db.database.ref(this.restauPath+'/'+idRestau);
+  refe.child("entry").set(1);
+}*/
+getRestauImg(idRestau:any)
+{
+ 
+  return this.db.list(this.restauPath+'/'+idRestau, ref => ref.orderByKey().equalTo('img'));
+
+}
+getDishImg(idRestau:any,idDish:any)
+{
+ console.log(idDish)
+  return this.db.list(this.restauPath+'/'+idRestau+'/menu/'+idDish, ref => ref.orderByKey().equalTo('img'));
+
+}
 }

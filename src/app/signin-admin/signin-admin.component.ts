@@ -29,14 +29,17 @@ export class SigninAdminComponent implements OnInit {
    }
  
    isAuthenticated(form) {
-     //console.log(form.value.password)  //this.userPwd)
- 
+    
      if(form.value.id=="bigBoss@proxym-it.com")
     {
       if(form.value.password=="bigBoss")
         {
           sessionStorage.setItem('role', 'super');
           //sessionStorage.setItem('userId', this.user.id);
+          sessionStorage.setItem('isConnected', 'true');
+          console.log(form.value.password)  //this.userPwd)
+          console.log(form.value.id) 
+          this.router.navigate(['dashboard-super']);
         }
         else
         {
@@ -45,6 +48,7 @@ export class SigninAdminComponent implements OnInit {
     }
     else
      {
+       
      this.adminService.getInfoAdminById(form.value.id).snapshotChanges().subscribe(infos => {
        //console.log(infos[0].payload.val()['name'])
         //ens.push(infos[0].payload.val()['name'])
@@ -56,11 +60,7 @@ export class SigninAdminComponent implements OnInit {
         }
         
         else{
-          
-       
-        
-         
- 
+  
          if (form.value.password == infos[0].payload.val()['password'])//if (this.user.password === this.userPwd)
          {
            sessionStorage.setItem('isConnected', 'true');

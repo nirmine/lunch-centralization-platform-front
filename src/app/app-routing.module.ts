@@ -1,3 +1,4 @@
+import { DashboardSuperComponent } from './dashboard-super/dashboard-super.component';
 import { DashboardRestauComponent } from './dashboard-restau/dashboard-restau.component';
 import { AuthGuard } from './services/auth.guard';
 import { AddRestaurantAdminComponent } from './add-restaurant-admin/add-restaurant-admin.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
    { path: 'signInRestau', component: SigninRestauComponent },
    { path: 'signInAdmin', component: SigninAdminComponent },
    { path: 'dashboard-restau', component: DashboardRestauComponent,canActivate:[AuthGuard]},
+   { path: 'dashboard-super', component: DashboardSuperComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

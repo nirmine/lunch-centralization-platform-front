@@ -12,7 +12,7 @@ export class AddDishListComponent implements OnInit {
 
   constructor(private resService:RestaurantService) {
     this.showMenu=new Menu();
-    this.Restaukey=localStorage.getItem('userId');
+    this.Restaukey=sessionStorage.getItem('userId');
     this.retrieveAllMenus();
     this.deletedMenu=new Menu();
     this.update=false;

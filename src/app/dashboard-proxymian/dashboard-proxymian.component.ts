@@ -61,7 +61,7 @@ export class DashboardProxymianComponent implements OnInit {
         {
          for(el in this.ens[e])//this.ens[e]:the list of this user's orders//el:dish's names
          {  
-           if(el != "status")
+           if(el != "status" && el!="total" && el!="note")
             {
              
                ch=ch+'\n '+this.ens[e][el]+' '+el
@@ -265,7 +265,7 @@ restausList:any=[];
   
              for(el in ens[e])//this.ens[e]:the list of this user's orders//el:dish's names
              {  
-               if(el != "status")
+               if(el != "status" && el!="total" && el!="note")
                 {
                  
                    ch=ch+'\n '+ ens[e][el]+' '+el
