@@ -19,7 +19,7 @@ export class AddRestaurantAdminComponent implements OnInit {
     
     console.log(this.restau);
     this.restauService.createRestaurant(this.restau.id,this.restau);
-    this.router.navigate(['dashboard-admin']);
+    this.router.navigate(['restaus-list']);
   }
 
 }

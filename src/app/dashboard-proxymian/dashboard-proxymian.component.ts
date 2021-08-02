@@ -25,12 +25,14 @@ export class DashboardProxymianComponent implements OnInit {
       localStorage.setItem('firstReload', 'true');
     }
     this.getAllRestaus();
+   // console.log(sessionStorage.getItem('role'))
    this.idUser=sessionStorage.getItem('userId');
    this.userName=sessionStorage.getItem('name');
-  console.log(sessionStorage.getItem('name'))
+ // console.log(sessionStorage.getItem('name'))
   // console.log(this.idUser)
    this.restauService.getOrdersOfUser(this.idUser).snapshotChanges().subscribe(orders => {
     //console.log(orders[1].payload.val())
+    this.orders=[]
       orders.forEach(element => {
         //console.log(element.key):restaurant key
        
@@ -45,6 +47,7 @@ export class DashboardProxymianComponent implements OnInit {
         let ch:string=""
         let liste=[];
         let status;
+        let total;
         let st;
         for(st in this.ens)//e:idUsers
         {
@@ -68,9 +71,11 @@ export class DashboardProxymianComponent implements OnInit {
               
              }
              else
-            
+             if(el == "status")
               status=this.ens[e][el]
-             
+             else
+             if(el=="total")
+             total=this.ens[e][el]
           }
           
                 //ch=ch+'\n '+this.ens[e][el]+' '+el
@@ -78,7 +83,12 @@ export class DashboardProxymianComponent implements OnInit {
                 liste.push(status)//the order status :it could be undefined
                 ordersSet["orderList"]=ch;
                 ordersSet["idRestau"]=element.key;
+                if(orderStatus=="")
                 ordersSet["status"]=status;
+                else
+                ordersSet["status"]=orderStatus;
+              //  console.log(orderStatus)
+                ordersSet["total"]=total;
                 ordersSet["orderStatus"]=orderStatus;
                 this.getInfoRestau(element.key,ordersSet)
                 this.order[element.key]=liste;
@@ -137,7 +147,7 @@ restausList:any=[];
 
   goToMenu(idRestau:any)
   {
-    localStorage.setItem('restauId',idRestau);
+    sessionStorage.setItem('restauId',idRestau);
     //console.log(idRestau)
    this.router.navigate(['RestauMenu']);
   }
@@ -191,6 +201,7 @@ restausList:any=[];
     let ch=""
     this.restauService.getFinishedOrdersOfUser(this.idUser).snapshotChanges().subscribe
     (res=>{
+      this.finishedOrders=[]
       res.forEach(element => {
         
         //console.log(element.key) //:restaurant's key
@@ -198,6 +209,7 @@ restausList:any=[];
         let e:any
         let x:any=element.payload.val()
         let y;
+        let total
         for(e in x) //e: the key of a finished orders
         {     //console.log(x[e])
              order={}
@@ -206,12 +218,18 @@ restausList:any=[];
               {
                
                 for(y in x[e] )
-                if(y !="idUser" && y!="status" && y!="feedback")
+                if(y !="idUser" && y!="status" && y!="feedback" && y!="note" && y!="total")
                   ch=ch+'\n'+y
+                  else
+                  {
+                    if(y=="total")
+                      total=x[e][y]
+                  }
                   //console.log(y)//y:name of dishs
                   order['key']=e;
                   order['idRestau']=element.key;
                   order['status']=x[e].status;
+                  order['total']=total;
                   order['feedback']=x[e].feedback;
                   order['orders']=ch
                   this.getInfoRestau(element.key,order)
@@ -220,7 +238,7 @@ restausList:any=[];
             
               
         }
-        //console.log(this.finishedOrders)
+     //   console.log(this.finishedOrders)
 
       });
     
@@ -236,6 +254,7 @@ restausList:any=[];
       let ens:any={}
       this.restauService.getOrdersOfUser("1").snapshotChanges().subscribe(orders => {
         //console.log(orders[1].payload.val())
+        this.toDeliverOrders=[]
           orders.forEach(element => {
             //console.log(element.key):restaurant key
             this.toDeliverOrder={}
@@ -302,7 +321,7 @@ restausList:any=[];
                 this.toDeliverOrders.push(this.toDeliverOrder)
     
           });
-          console.log(this.toDeliverOrders)//{restauKey:[dishs,status,restauName]}
+          //console.log(this.toDeliverOrders)//{restauKey:[dishs,status,restauName]}
   
           }, (error) => {
             console.log(error);
@@ -322,11 +341,6 @@ getInfoUser(idUser,ens:any)
 volunteerForDelivery(idRestau:any)
 {
 this.restauService.setDelivery(idRestau,this.userName)
-if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
-  localStorage.setItem('firstReload', 'false');
-  window.location.reload();
-} else {
-  localStorage.setItem('firstReload', 'true');
-}
+
 }
 }

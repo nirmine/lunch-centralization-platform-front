@@ -15,6 +15,7 @@ export class AddAdminSuperComponent implements OnInit {
   constructor(private superAdminService: SuperAdminService,private router : Router, private route: ActivatedRoute) 
   {
 this.superAdminService.getAllUsers().snapshotChanges().subscribe(res=>{
+  this.users=[]
 res.forEach(element => {
   let ens={}
   //console.log(element.key):idUser
@@ -42,22 +43,7 @@ res.forEach(element => {
   {
     //console.log(idUser)
      this.superAdminService.setStatus(idUser,status)
-     if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
-      localStorage.setItem('firstReload', 'false');
-      window.location.reload();
-    } else {
-      localStorage.setItem('firstReload', 'true');
-    }
-  }
-  save() {
     
-   this.superAdminService.createAdminByKey(this.admin.id,this.admin);
-     console.log("done");
-     alert("admin is successfully added");
-     this.router.navigate(['home']);
   }
-  cancel()
-  {
-    this.router.navigate(['home']);
-  }
+  
 }

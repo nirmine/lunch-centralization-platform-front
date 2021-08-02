@@ -1,3 +1,6 @@
+import { UsersListComponent } from './users-list/users-list.component';
+import { FeedbacksListComponent } from './feedbacks-list/feedbacks-list.component';
+import { RestausListComponent } from './restaus-list/restaus-list.component';
 import { DashboardSuperComponent } from './dashboard-super/dashboard-super.component';
 import { DashboardRestauComponent } from './dashboard-restau/dashboard-restau.component';
 import { AuthGuard } from './services/auth.guard';
@@ -36,6 +39,10 @@ const routes: Routes = [
    { path: 'signInAdmin', component: SigninAdminComponent },
    { path: 'dashboard-restau', component: DashboardRestauComponent,canActivate:[AuthGuard]},
    { path: 'dashboard-super', component: DashboardSuperComponent,canActivate:[AuthGuard]},
+   { path: 'restaus-list', component: RestausListComponent,canActivate:[AuthGuard]},
+   { path: 'feeds-list', component: FeedbacksListComponent,canActivate:[AuthGuard]},
+   { path: 'users-list', component: UsersListComponent,canActivate:[AuthGuard]},
+
 ];
 
 @NgModule({

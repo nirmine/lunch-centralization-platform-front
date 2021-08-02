@@ -15,8 +15,11 @@ export class SigninAdminComponent implements OnInit {
     console.log( sessionStorage.getItem('isConnected'))
    }
   erreur = true;
+  noAdmin=true;
   user:any={};
- 
+  userName="";
+  userPwd:any;
+  userRole:any;
   //userPwd:any;
   //userRole:any;
   ngOnInit(): void {
@@ -30,7 +33,7 @@ export class SigninAdminComponent implements OnInit {
  
    isAuthenticated(form) {
     
-     if(form.value.id=="bigBoss@proxym-it.com")
+    /* if(form.value.id=="bigBoss@proxym-it.com")
     {
       if(form.value.password=="bigBoss")
         {
@@ -47,9 +50,9 @@ export class SigninAdminComponent implements OnInit {
         }
     }
     else
-     {
+     {*/
        
-     this.adminService.getInfoAdminById(form.value.id).snapshotChanges().subscribe(infos => {
+    /* this.adminService.getInfoAdminById(form.value.id).snapshotChanges().subscribe(infos => {
        //console.log(infos[0].payload.val()['name'])
         //ens.push(infos[0].payload.val()['name'])
         //console.log(infos.length)
@@ -80,8 +83,79 @@ export class SigninAdminComponent implements OnInit {
          
           }, (error) => {
             console.log(error);
-          });
-        }
+          });*/
+
+          this.restauService.getInfoUserById(form.value.id).snapshotChanges().subscribe(infos => {
+            //console.log(infos[0].payload.val()['name'])
+             //ens.push(infos[0].payload.val()['name'])
+             //console.log(infos.length)
+             if(infos.length==0)
+             {
+              console.log("user inexistant")
+              this.erreur = false;
+             }
+             
+             else{
+              if(infos[0].payload.val()['role']=="super")
+              {
+                if (form.value.password == infos[0].payload.val()['password'])
+                {
+                  sessionStorage.setItem('isConnected', 'true');
+                 console.log('connected')
+                 
+                 sessionStorage.setItem('role','super');
+                 sessionStorage.setItem('userId', this.user.id);
+                 sessionStorage.setItem('name', infos[0].payload.val()['name']);
+                 this.router.navigate(['dashboard-super']);
+                 } else 
+                 {
+                 this.erreur = false;
+                 }
+
+              }
+              else
+               {
+               if(infos[0].payload.val()['role']=="admin")
+              {
+               this.userRole="admin"
+              this.userName=infos[0].payload.val()['name']
+              this.userPwd=infos[0].payload.val()['password']
+      
+              if (form.value.password == infos[0].payload.val()['password'])
+              {
+                sessionStorage.setItem('isConnected', 'true');
+               console.log('connected')
+               
+               sessionStorage.setItem('role','admin');
+               sessionStorage.setItem('userId', this.user.id);
+               sessionStorage.setItem('name', infos[0].payload.val()['name']);
+               this.router.navigate(['dashboard-admin']);
+               } else 
+               {
+               this.erreur = false;
+               }
+             }
+             else 
+             {
+             this.noAdmin = false;
+             }
+            }
+
+
+      
+             }
+              
+               }, (error) => {
+                 console.log(error);
+               });
+      
+
+
+
+
+
+
+      //  }
  
  
   

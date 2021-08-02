@@ -30,6 +30,9 @@ import { SigninAdminComponent } from './signin-admin/signin-admin.component';
 import { SigninRestauComponent } from './signin-restau/signin-restau.component';
 import { DashboardRestauComponent } from './dashboard-restau/dashboard-restau.component';
 import { DashboardSuperComponent } from './dashboard-super/dashboard-super.component';
+import { RestausListComponent } from './restaus-list/restaus-list.component';
+import { FeedbacksListComponent } from './feedbacks-list/feedbacks-list.component';
+import { UsersListComponent } from './users-list/users-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +57,9 @@ import { DashboardSuperComponent } from './dashboard-super/dashboard-super.compo
     SigninRestauComponent,
     DashboardRestauComponent,
     DashboardSuperComponent,
+    RestausListComponent,
+    FeedbacksListComponent,
+    UsersListComponent,
    
 
   ],

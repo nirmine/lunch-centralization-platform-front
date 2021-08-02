@@ -11,16 +11,33 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MenuProxymianComponent implements OnInit {
 
   constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
-    this.idRestau=localStorage.getItem('restauId');
-    this.userId=localStorage.getItem('userId');
+    this.idRestau=sessionStorage.getItem('restauId');
+    this.userId=sessionStorage.getItem('userId');
+    console.log(this.userId)
     this.retrieveAllMenus();
+    this.resService.getOrderOfUserByIdRestau(this.idRestau,this.userId).snapshotChanges().subscribe
+    (res=>{
+      
+      if(res.length!=0)
+      {
+       
+        if(res[0].payload.val()['status']=="confirmed")
+            this.test="true";
+            else
+            this.test="false"
+        
+      }
+      else
+      this.test="false"
+      console.log(this.test)
+    })
    }
 
   idRestau:any;//the key of the desired restaurant 
   userId:any;
   map = new Map();
   menus: any = [];
-  
+  test:any;//test==true:this user can't order from this restau because he has confirmed his order=>he should ask from the admin to change his order
   ngOnInit(): void {
   }
   retrieveAllMenus() {
@@ -47,7 +64,7 @@ export class MenuProxymianComponent implements OnInit {
 
    }
      
-       console.log(this.map);
+      // console.log(this.map);
     }, (error) => {
       console.log(error);
     });           
@@ -55,14 +72,19 @@ export class MenuProxymianComponent implements OnInit {
 nbr:number=1;
   orderDish(dishkey:any)
   {
-console.log(dishkey)
+//console.log(dishkey)
 console.log(this.resService.updateOrderList(this.userId,dishkey,this.idRestau,this.nbr));
   }
 
   goToOrderValidationPage()
   {
-   
-    
+     
    this.router.navigate(['validateOrder']);
+  }
+
+  check()
+  {
+    
+   
   }
 }

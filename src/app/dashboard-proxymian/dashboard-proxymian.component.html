@@ -47,21 +47,21 @@
                             <th>Restaurant Name</th>
                             <th>Dishs</th>
                             <th>Status</th>
-                            <th class="text-right">Salary</th>
+                            <th class="text-right">Total</th>
                             <th class="text-right">Actions</th>
-                            <th class="text-center">Give your feedback</th>
+                            <th class="text-center">Delivery</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody  *ngIf="orders.length!=0">
                         <tr class="nouv" *ngFor="let order of orders">
                             <!--<td class="text-center">1</td>-->
                             <td>{{order.restauName}}</td>
                             <td>{{order.orderList}}</td>
                             <td><strong  *ngIf="order.status=='not confirmed'" style="color: rgb(255, 0, 0);">{{order.status}}</strong>
-                              <strong  *ngIf="order.status=='confirmed'" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
+                              <strong  *ngIf="order.status!='not confirmed'" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
                             
                             </td>
-                            <td class="text-right"> 99,225 dt</td>
+                            <td class="text-right"> {{order.total}} </td>
                             <td class="td-actions text-right">
                                 
                                 <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title=""  style="height: 30px;" *ngIf="order.status=='not confirmed'" (click)=" editOrder(order.idRestau)">
@@ -87,6 +87,12 @@
                      
                   
                     </tbody>
+                    <tbody *ngIf="orders.length==0">
+                      <tr class="nouv" >
+                          <!--<td class="text-center">1</td>-->
+                          <td colspan="6" class="text-center">No orders found</td>                       
+                      </tr>
+                  </tbody>
                 </table>
                 </div>
 
@@ -95,7 +101,7 @@
             </div>
           </section>
 <!--finished orders-->
-          <section id="feed" class="chefs" style="margin-top: -150px; margin-bottom: 150px;margin-left: -200px;" >
+          <section id="feed" class="chefs" style="margin-top: -150px; margin-bottom: 0px;margin-left: -200px;" >
             <div class="container" data-aos="fade-up">
        <div class="section-title">
                 <h2>Orders</h2>
@@ -110,12 +116,12 @@
                                   <th>Restaurant Name</th>
                                   <th>Dishs</th>
                                   <th>Status</th>
-                                  <th class="text-right">Salary</th>
+                                  <th class="text-right">Total(dt)</th>
                                
                                   <th class="text-center">Give your feedback</th>
                               </tr>
                           </thead>
-                          <tbody>
+                          <tbody *ngIf="finishedOrders.length!=0">
                               <tr class="nouv" *ngFor="let order of finishedOrders">
                                   <!--<td class="text-center">1</td>-->
                                   <td style="font-size:large;">{{order.restauName}}</td>
@@ -124,7 +130,7 @@
                                     <strong  *ngIf="order.status=='done'" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
                                   
                                   </td>
-                                  <td class="text-right">€ 99,225</td>
+                                  <td class="text-right">{{order.total}}</td>
                           
                                   <td class="td-actions text-center">
                                                <p *ngIf="order.feedback !=null" style="font-size:large;">{{order.feedback}}</p>             
@@ -138,6 +144,12 @@
                            
                         
                           </tbody>
+                          <tbody *ngIf="finishedOrders.length==0">
+                            <tr class="nouv" >
+                                <!--<td class="text-center">1</td>-->
+                                <td colspan="5" class="text-center">No orders found</td>                       
+                            </tr>
+                        </tbody>
                       </table>
                       </div>
       
@@ -146,7 +158,7 @@
                   </div>
                 </section>
 
-          <section id="delivery" class="chefs" style="margin-top: 0px; margin-bottom: 150px;margin-left: -200px;" >
+          <section id="delivery" class="chefs" style="margin-top: 0px; margin-bottom: 0px;margin-left: -200px;" >
             <div class="container" data-aos="fade-up">
        <div class="section-title">
                 <h2>Orders in general</h2>
@@ -166,7 +178,7 @@
                                   <th class="text-center">Volunteer for delivery if possible</th>
                               </tr>
                           </thead>
-                          <tbody>
+                          <tbody *ngIf="toDeliverOrders.length!=0">
                               <tr class="nouv" *ngFor="let order of  toDeliverOrders">
                                   <!--<td class="text-center">1</td>-->
                                   <td>{{order.restauName}}</td>
@@ -185,6 +197,12 @@
                            
                         
                           </tbody>
+                          <tbody *ngIf="toDeliverOrders.length==0">
+                            <tr class="nouv" >
+                                <!--<td class="text-center">1</td>-->
+                                <td colspan="6" class="text-center">No orders found</td>                       
+                            </tr>
+                        </tbody>
                       </table>
                       </div>
       

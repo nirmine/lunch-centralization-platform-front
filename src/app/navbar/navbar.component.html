@@ -12,10 +12,13 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0" >
         <ul>
+          <li *ngIf="userConnectedRole =='restau'" class="nav-link scrollto active">Connected as {{restauName}}</li>
           <li><a class="nav-link scrollto active" href="#hero" *ngIf="isConnected=='false' || isConnected==null">Home</a></li>
-          <li><a class="nav-link scrollto active" *ngIf="isConnected=='true'" (click)="showDash()">dashboard</a></li>
+          <li><a class="nav-link scrollto active"       *ngIf="isConnected=='true'" (click)="showDash()">dashboard</a></li>
           <li><a class="nav-link scrollto" href="/home#about" *ngIf="isConnected=='false' || isConnected==null">About</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='admin' )" href="/addRestaurant-admin">new Restaurant</a></li>
+          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='admin' || userConnectedRole =='super')" href="/addRestaurant-admin">new Restaurant</a></li>
+          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='admin' || userConnectedRole =='super')" href="/restaus-list">Restaurants</a></li>
+          
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/addNewAdmin">Admins</a></li>
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/dashboard-admin">Orders</a></li>
           <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/addNewDish">Nouveau plat</a></li>
@@ -59,6 +62,7 @@
       </li>
       </ul>
       </nav>
+   
       <a  class="book-a-table-btn scrollto d-none d-lg-flex" (click)="signout()" *ngIf="isConnected=='true'" >sign out</a>
     </div>
     

@@ -64,6 +64,7 @@
         <div class="section-title">
                 <h2>commandes</h2>
                 <p>Commandes En attente de livraison </p>
+                <h2 style="color: rgb(17, 0, 255);margin-top: 20px;">Livreur:{{delivery}}</h2>
               </div>
         
                       <div class="table-responsive">
@@ -110,7 +111,7 @@
                         </tbody>
         
                       </table>
-                      <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 100px;height: 40px;margin-left: 20px;" (click)="setOrderStatus('on delivery')" [disabled]="orderStatus!='sent'" *ngIf="orderStatus=='ready'">en livraison</button>
+                      <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 100px;height: 40px;margin-left: 20px;" (click)="setOrderStatus('on delivery')"  *ngIf="orderStatus=='ready'">en livraison</button>
                      
                       </div>
         

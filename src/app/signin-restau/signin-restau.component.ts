@@ -53,7 +53,7 @@ export class SigninRestauComponent implements OnInit {
          {
            sessionStorage.setItem('isConnected', 'true');
           //console.log('connected')
-          
+          sessionStorage.setItem('restauName', infos[0].payload.val()['name']);
           sessionStorage.setItem('role', 'restau');
           sessionStorage.setItem('userId', this.user.id);
          

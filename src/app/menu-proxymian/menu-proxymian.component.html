@@ -55,8 +55,8 @@
           <div class="menu-ingredients">
             {{dish['composition']}}
           </div>
-          <div class="menu-ingredients" style="margin-left: 120px;">
-            <a (click)=" orderDish(dish['name'])" class="ord">==order==></a>
+          <div class="menu-ingredients" style="margin-left: 120px;" *ngIf="test=='false'">
+            <a (click)=" orderDish(dish['name'])" class="ord" >==order==></a>
           </div>
         </div>
         

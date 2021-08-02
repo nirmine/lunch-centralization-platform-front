@@ -13,8 +13,8 @@ export class ValidateOrderProxymianComponent implements OnInit {
   userId:any;
 
   constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
-    this.idRestau=localStorage.getItem('restauId');
-    this.userId=localStorage.getItem('userId');
+    this.idRestau=sessionStorage.getItem('restauId');
+    this.userId=sessionStorage.getItem('userId');
 
     
 
@@ -23,7 +23,7 @@ export class ValidateOrderProxymianComponent implements OnInit {
    // this.total="0";
   //console.log(this.idRestau)
    this.resService.getOrdersByIdRestau(this.idRestau).snapshotChanges().subscribe(order => {
- 
+    this.orderList=[]
     let e;
     let ens:any={};
     let el:any={};
@@ -51,7 +51,10 @@ export class ValidateOrderProxymianComponent implements OnInit {
           this.getDishInfo(x,el);
          
          // this.total=this.total+parseInt(el.price)*parseInt(el.nbr)
+       
+       
           this.orderList.push(el)
+         // console.log(this.orderList.indexOf(el))
           //console.log(this.orderList)
         }
         else

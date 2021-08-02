@@ -4,7 +4,7 @@
 <div class="section-title">
         
         <p>Users</p>
-        <h2>click to choose an admin</h2>
+        <h2>click to choose a volunteer for delivery</h2>
       </div>
 
               <div class="table-responsive">
@@ -15,9 +15,8 @@
                           <th>User Name</th>
                           <th>Phone number</th>
                           <th>Email</th>
-                          <th class="text-right">Role</th>
-                          <th class="text-right">Actions</th>
-                          <th class="text-center"></th>
+                          <th></th>
+                          
                       </tr>
                   </thead>
                   <tbody *ngIf="users!=[]">
@@ -27,19 +26,12 @@
                           <td>{{user.phone}}</td>
                           <td>
                             {{user.email}}
-                          </td>
-                          <td class="text-right"><p *ngIf="user.role!='admin'">{{user.role}}</p> <p style="color: rgb(99, 224, 26);" *ngIf="user.role=='admin'">admin</p>
-                           
-                        </td>
+                          </td>                                             
                           <td class="td-actions text-right">
                               
-                            <button type="button" class="btn btn-info btn-round" *ngIf="user.role!='admin'" (click)="setUserStatus(user['id'],'admin')" >Admin </button>   
-                            <button type="button" class="btn btn-info btn-round" *ngIf="user.role=='admin'" (click)="setUserStatus(user.id,'normal')">not admin </button>                       
-                          
+                            <button type="button" class="btn btn-info btn-round" (click)=" volunteerForDelivery(user.name)"  >volunteered </button>                                                              
                         </td>
-                          <td class="td-actions text-center"> <button type="button"   class="btn btn-link"  >
-                            <i class="material-icons">close</i>
-                        </button>  </td>
+                         
 
                       </tr>      
                   </tbody>

@@ -23,7 +23,8 @@ order:any={};
 
   onSubmitt()
   {
-    console.log(this.finishedOrderIdRestau)
-    //this.restauService.setFeedbackAboutOrder(this.finishedOrderIdRestau,this.finishedOrderIdOrder,this.order.feed)
+   console.log(this.finishedOrderIdRestau)
+    this.restauService.setFeedbackAboutOrder(this.finishedOrderIdRestau,this.finishedOrderIdOrder,this.order.feed)
+  this.router.navigate(['dashboard'])
   }
 }

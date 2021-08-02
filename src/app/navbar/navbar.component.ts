@@ -10,10 +10,11 @@ export class NavbarComponent implements OnInit {
 
   isConnected:any;
   userConnectedRole:any="";
+  restauName:any="";
   constructor(private router : Router, private route: ActivatedRoute) { 
     this.isConnected=sessionStorage.getItem('isConnected')
     this.userConnectedRole=sessionStorage.getItem('role')
-    
+    this.restauName=sessionStorage.getItem('restauName')
   }
 
   ngOnInit(): void {

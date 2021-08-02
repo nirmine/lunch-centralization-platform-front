@@ -25,7 +25,7 @@ export class DashboardRestauComponent implements OnInit {
       this.restauId=sessionStorage.getItem('userId');
       
     this.restauService.getOrdersByIdRestau(this.restauId).snapshotChanges().subscribe(order => {
- 
+      this.orderList=[]
       //console.log(order) :all orders of this restau + delivery+orderStatus
       let e;
       let ens:any={};

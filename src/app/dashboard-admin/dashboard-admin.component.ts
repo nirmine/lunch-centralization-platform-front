@@ -29,11 +29,13 @@ export class DashboardAdminComponent implements OnInit {
   order:any={}
   ordersByUser:any=[]
   orders:any=[]
+  orderStatus="";
   getOrders()
   {
     let ens:any={}
     this.restauService.getOrdersOfUser("1").snapshotChanges().subscribe(orders => {
       //console.log(orders[1].payload.val())
+      this.orders=[]
         orders.forEach(element => {
           //console.log(element.key):restaurant key
           this.order={}
@@ -50,6 +52,8 @@ export class DashboardAdminComponent implements OnInit {
           let ch:string=""
           let liste=[];
           let status;
+          let note;
+          let total;
           for(e in ens)//e:idUsers
           {
             
@@ -63,16 +67,22 @@ export class DashboardAdminComponent implements OnInit {
 
            for(el in ens[e])//this.ens[e]:the list of this user's orders//el:dish's names
            {  
-             if(el != "status")
+             if(el != "status" && el!="total" && el!="note")
               {
                
                  ch=ch+'\n '+ ens[e][el]+' '+el
                 
                }
                else
-              
+              if(el == "status")
                 status=ens[e][el]
-               
+                else
+                if(el == "note")
+                note=ens[e][el]
+                else
+                if(el == "total")
+                total=ens[e][el]
+               //console.log(status)
             }
           
 
@@ -84,6 +94,8 @@ export class DashboardAdminComponent implements OnInit {
                  // ordersSet["idRestau"]=element.key;
                  this.getInfoUser(e,ordersSet)
                   ordersSet["status"]=status;
+                  ordersSet["note"]=note;
+                  ordersSet["total"]=total;
                   restauOrders.push(ordersSet)
                   //this.getInfoRestau(element.key,ordersSet)
                  
@@ -92,7 +104,13 @@ export class DashboardAdminComponent implements OnInit {
           }
           else{
             if(e=="status")
-            this.order["orderStatus"]=ens[e]
+            {
+              this.order["orderStatus"]=ens[e]
+              this.orderStatus=ens[e]
+            }
+           
+            else
+            this.order["delivery"]=ens[e]
           }
             
           }
@@ -134,7 +152,7 @@ export class DashboardAdminComponent implements OnInit {
   /* order:any={}
   
   orders:any=[]*/ 
-  getAllOrders()
+  /*getAllOrders()
   {
     let ens:any={}
     this.restauService.getOrdersOfUser("1").snapshotChanges().subscribe(orders => {
@@ -203,16 +221,16 @@ export class DashboardAdminComponent implements OnInit {
           console.log(error);
         });
   }
-
+*/
   sendOrder(idRestau:any)
   {
     this.restauService.updateOrderStatus(idRestau,"sent")
-    if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
+    /*if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
       localStorage.setItem('firstReload', 'false');
       window.location.reload();
     } else {
       localStorage.setItem('firstReload', 'true');
-    }
+    }*/
 
   }
 
@@ -224,7 +242,7 @@ export class DashboardAdminComponent implements OnInit {
       if(element.idRestau==idRestau)
         {
           element.orders.forEach(elt => {
-              console.log(elt)
+             // console.log(elt)
               if(elt.status=='not confirmed' || element.orderStatus=='sent')
                 notConfirmed=true
           });
@@ -233,5 +251,10 @@ export class DashboardAdminComponent implements OnInit {
 
     
     return notConfirmed
+  }
+  goToVolunteeringPage(idRestau:any)
+  {
+    sessionStorage.setItem('restauId',idRestau)
+    this.router.navigate(['users-list'])
   }
 }

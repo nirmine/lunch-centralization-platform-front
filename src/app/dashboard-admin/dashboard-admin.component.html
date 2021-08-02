@@ -1,6 +1,6 @@
 
 
-   <section id="chefs" class="chefs" style=" margin-left: -270px;margin-top: 120px;height: 0px;" >
+   <section id="chefs" class="chefs" style=" margin-left: -270px;margin-top: 50px;height: 0px;" >
     <div class="container" data-aos="fade-up">
 <div class="section-title">
         <h2>Orders</h2>
@@ -13,6 +13,7 @@
    <div class="section-title">
             <h2 style="font-size:30px;font-style:italic;" >{{restauOrders.restauName}}</h2>
             <h2 style="margin-top: 20px;" >{{restauOrders.restauPhone}}</h2>
+            <h2 style="margin-top: 20px;color: red;" >Delivery On: {{restauOrders.delivery}} <span *ngIf="restauOrders.delivery=='not restaurant'"> & no volunteer</span></h2>
           </div>
     
                   <div class="table-responsive">
@@ -24,22 +25,22 @@
                               <th>Client</th>
                               <th>Dishs</th>
                               <th>Status</th>
-                              <th class="text-right">Salary</th>
+                              <th class="text-right">Total(dt)</th>
                               <th class="text-right">Actions</th>
-                              <th class="text-center">Notify</th>
+                             
                           </tr>
                       </thead>
-                      <tbody>
+                      <tbody><!--*ngIf="orderStatus!='on delivery' && orderStatus!='ready'">-->
                           <tr class="nouv"  *ngFor="let order of restauOrders.orders">
                               <!--<td class="text-center">1</td>-->
                             
                               <td>{{order.userName}}</td>
                               <td>{{order.orderList}}</td>
-                              <td><strong  *ngIf="order.status=='not confirmed'" style="color: rgb(255, 0, 0);">{{order.status}}</strong>
-                                <strong  *ngIf="order.status=='confirmed'" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
-                              
+                              <td><strong  *ngIf="order.status=='not confirmed' && restauOrders.orderStatus==undefined" style="color: rgb(255, 0, 0);">{{order.status}}</strong>
+                                <strong  *ngIf="order.status=='confirmed' && restauOrders.orderStatus==undefined" style="color: rgb(99, 224, 26);">{{order.status}}</strong>
+                                <strong  *ngIf="restauOrders.orderStatus!=undefined" style="color: rgb(99, 224, 26);">{{restauOrders.orderStatus}}</strong>
                               </td>
-                              <td class="text-right">€ 99,225</td>
+                              <td class="text-right">{{order.total}}</td>
                               <td class="td-actions text-right">
                                   
                                   <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title=""  style="height: 30px;" *ngIf="order.status=='not confirmed'" >
@@ -53,12 +54,7 @@
                                  
                                 
                               </td>
-                              <td class="td-actions text-center"  >
-                                <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 70px;height: 40px;" *ngIf="order.status=='not confirmed'">
-                                  notify
-                                </button>                          
-                                
-                            </td>
+                           
                            
                           </tr>
                   
@@ -67,7 +63,8 @@
                     
                       </tbody>
                   </table>
-                  <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 150px;height: 40px;margin-left: 20px;" (click)="sendOrder(restauOrders.idRestau)" [disabled]=" allAccepted(restauOrders.idRestau)" *ngIf="restauOrders.orderStatus !='sent'">send order</button>
+                  <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 150px;height: 40px;margin-left: 20px;" (click)="sendOrder(restauOrders.idRestau)" [disabled]=" allAccepted(restauOrders.idRestau) || (restauOrders.delivery=='not restaurant')" *ngIf="(restauOrders.orderStatus !='sent') && (restauOrders.orderStatus !='on delivery') && (restauOrders.orderStatus !='ready')">send order</button>
+                  <button type="button" rel="tooltip" class="btn btn-info btn-just-icon btn-sm" data-original-title="" title="" style="width: 150px;height: 40px;margin-left: 20px;"   *ngIf="restauOrders.orderStatus !='sent' && restauOrders.delivery=='not restaurant' " (click)="  goToVolunteeringPage(restauOrders.idRestau)">Delivery-volunteer</button>
                     <p *ngIf="restauOrders.orderStatus =='sent'" style="margin-left: 80%;font-style: oblique;font-size: large;color:rgb(0, 255, 34) ; ">Order Sent to the restaurant!</p>  
                 </div>
   

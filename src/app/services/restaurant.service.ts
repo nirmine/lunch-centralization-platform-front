@@ -238,7 +238,11 @@ setOrderAsDone(idRestau:any,idUser:any,id:any)
    // id.push(ref.push(ens).key)
    ref.push(ens)
   orderRef.remove(idUser)
-
+    this.getOrdersByIdRestau(idRestau).snapshotChanges().subscribe(res=>{
+     
+      if(res.length==2)
+      this.db.list(this.ordersPath).remove(idRestau);
+    })
     
        }, (error) => {
          console.log(error);
@@ -359,5 +363,26 @@ getDishImg(idRestau:any,idDish:any)
  console.log(idDish)
   return this.db.list(this.restauPath+'/'+idRestau+'/menu/'+idDish, ref => ref.orderByKey().equalTo('img'));
 
+}
+
+getRestauImageSrc(idRestau:any,ens:any)
+{
+  let url="";
+  let restau
+  let elt:any={};
+    let e:any={};
+  this.getRestauImg(idRestau).snapshotChanges().subscribe(res=>{
+    elt=res[0].payload.val()
+    for(restau in elt)//restau:image key
+    //console.log(elt[restau].url)
+    ens['ImageUrl']=elt[restau].url
+  })
+    
+}
+
+deleteRestau(restauKey:any) {
+  let restauRef=this.db.list(this.restauPath);
+restauRef.remove(restauKey);
+  this.db.list(this.ordersPath).remove(restauKey);
 }
 }

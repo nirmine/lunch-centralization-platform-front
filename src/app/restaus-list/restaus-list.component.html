@@ -1,0 +1,60 @@
+<section id="feed" class="chefs" style="margin-top: 50px; margin-bottom: 150px;margin-left: -200px;" >
+    <div class="container" data-aos="fade-up">
+<div class="section-title">
+        <h2>lists</h2>
+        <p>List Of restaurants</p>
+      </div>
+
+              <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr class="nouveau">
+                          <!--<th class="text-center">#</th>-->
+                          <th></th>
+                          <th>Name</th>
+                          <th>Id</th>
+                          <th>Password</th>
+                          <th> address</th>
+                          <th>Email</th>
+                          <th class="text-right">Phone number</th>
+                       
+                          <th class="text-center">Actions</th>
+                          <th class="text-center"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr class="nouv" *ngFor="let restau of restausList">
+                          <!--<td class="text-center">1</td>-->
+                          <td><div class="img-container">
+                            <img src="{{restau.ImageUrl}}" alt="No image found" style="height: 70px;width: 70px;">
+                         </div></td>
+                          <td style="font-size:large;">{{restau.name}}</td>
+                          <td>{{restau.id}}</td>
+                          <td>{{restau.password}}</td>
+                          <td>{{restau.address}}</td>
+                          <td>
+                            {{restau.email}}
+                          
+                          </td>
+                          <td class="text-right">{{restau.phoneNumber}}</td>
+                          <td class="td-actions text-center">
+                            
+                        </td>
+                          <td class="td-actions text-center">
+                            <button type="button"   class="btn btn-link" (click)="deleteRestau(restau.id)" >
+                                <i class="material-icons">close</i>
+                            </button>
+                        </td>
+                      </tr>
+              
+                
+                   
+                
+                  </tbody>
+              </table>
+              </div>
+
+            
+
+          </div>
+        </section>

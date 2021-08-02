@@ -59,7 +59,7 @@ export class SigninUserComponent implements OnInit {
           sessionStorage.setItem('isConnected', 'true');
          console.log('connected')
          
-         sessionStorage.setItem('role', this.userRole);
+         sessionStorage.setItem('role','normal');
          sessionStorage.setItem('userId', this.user.id);
          sessionStorage.setItem('name', infos[0].payload.val()['name']);
          this.router.navigate(['dashboard']);
