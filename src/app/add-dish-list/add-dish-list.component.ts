@@ -108,7 +108,9 @@ this.menuKey=toUpdateMenu.key;
 updateDish()
 {
   this.update=false;
-  this.upload();
+ // this.upload();
+ if(this.selectedFiles!=undefined)
+ this.upload();
   this.resService.updateMenu(this.Restaukey,this.menuKey,this.newMenu) .catch(error => { console.log(error); });
 }
 

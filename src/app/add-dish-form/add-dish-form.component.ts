@@ -11,18 +11,20 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-dish-form.component.css']
 })
 export class AddDishFormComponent implements OnInit {
+ 
 
   constructor(public restService: RestaurantService,private router : Router, private route: ActivatedRoute) { 
     this.menu = new Menu();
-   console.log(sessionStorage.getItem('keyRestau'))
-   this.Restaukey=sessionStorage.getItem('keyRestau');
+   console.log(sessionStorage.getItem('userId'))
+  // this.Restaukey=sessionStorage.getItem('keyRestau');
    this.userId=sessionStorage.getItem('userId');
    console.log(this.userId);
   }
-  Restaukey:any;
+ // Restaukey:any;
   menu:  Menu;
   userId:any;
   testimage:any;
+  nameError=true;
   ngOnInit(): void {
 
   }
@@ -47,10 +49,14 @@ export class AddDishFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.save();
-    this. upload();
+   /* this.save();
+    this. upload();*/
    
-    console.log("done")
+    if(this. checkForm())
+    {
+      this.save();
+    this. upload();
+    }
   }
 
  
@@ -58,6 +64,7 @@ export class AddDishFormComponent implements OnInit {
   currentFileUpload: FileUpload;
   percentage: number;
   selectedFiles: FileList;
+  isSelected: boolean = false;
   selectFile(event) {
     this.selectedFiles = event.target.files;
   }
@@ -87,5 +94,68 @@ export class AddDishFormComponent implements OnInit {
       }
        // this.reset();
     });
+  }
+
+  compositionError=true
+  priceError=true;
+  typeError=true;
+  imageError=true;
+  checkForm()
+  {
+    let ch:string=this.menu.name;
+
+    if(ch.indexOf('.')>0 || ch.indexOf('[')>0 || ch.indexOf('#')>0 || ch.indexOf(']')>0 || ch.indexOf('$')>0 || ch=="")
+    {
+      this.nameError=false;
+      //console.log(false)
+      return false
+    }
+    else
+    {
+      this.nameError=true;
+        if(this.menu.composition=="")
+        {
+          this.compositionError=false
+          return false
+        }
+
+          else
+          {
+            this.compositionError=true
+            //console.log( parseInt(this.menu.price))
+            if(isNaN(parseInt(this.menu.price)))
+            {
+              this.priceError=false
+              return false
+            }
+              else
+              {
+                this.priceError=true
+                if(this.menu.type=="")
+              {
+                this.typeError=false
+               return false
+               }
+              else
+                {
+                  this.typeError=true
+                  if(this.selectedFiles==undefined)
+                  {
+                    this.imageError=false
+                  }
+                  else
+                  {
+                    this.imageError=true
+                    return true
+                  }
+                    
+                }
+              }
+          }
+
+    }
+
+
+
   }
 }

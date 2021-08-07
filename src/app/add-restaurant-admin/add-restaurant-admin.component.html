@@ -7,10 +7,11 @@
           <label for="id">Restaurant identifier</label>
           <input type="text" class="form-control" placeholder="Enter the restaurant's identifier'"  id="id" required [(ngModel)]="restau.id" name="id">
         </div>
+        <div [hidden]='error' style="color: red;margin-bottom: 20px;">the identifier must be non empty string and can't contain . [ ] # $ </div>
         <!-- Last name -->
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" placeholder="Enter the password of the restaurant"  id="password" required [(ngModel)]="restau.password" name="password">
+            <input type="text" class="form-control" placeholder="Enter the password of the restaurant"  id="password" required [(ngModel)]="restau.password" name="password">
         </div>  
        <!--  name -->
        <div class="form-group">

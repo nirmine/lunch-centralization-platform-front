@@ -1,36 +1,37 @@
 
-<div *ngIf="menus.length" style="margin-top: 180px; margin-bottom: 150px;" >
+<div *ngIf="menus.length" style="margin-top: 90px; margin-bottom: 150px;" >
     <h3  style="color: black;">Menu</h3>
     <br>
     <table class="table table-hover table-sm">
         <thead class="thead-dark">
           <tr>
-            
-            <th>Dish's name</th>
+            <th></th>
+            <th>Nom</th>
             <th>Composition</th>
-            <th>Price</th>
-            <th>image</th>
+            <th>Prix</th>
+           
             <th></th>
           </tr>
         </thead>
         <tbody>
             <tr *ngFor="let dish of menus "  >
-             
+              <td>
+
+                <img 
+                  src="{{map.get(dish['name'])}} "
+                  alt="no image" style="height: 50px;width: 50px;">
+  
+                </td>
               <td>{{dish['name']}}</td>
               <td>{{dish['composition']}}</td>
               <td>{{dish['price']}}</td>
-              <td>
-
-              <img 
-                src="{{map.get(dish['name'])}} "
-                alt="no image" style="height: 50px;width: 50px;">
-
-              </td>
+            
               <td>
 
                 <tr>
+                  <td><button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#edit-modal" (click)="showMenuToUpdate(dish)"  >modifier</button></td>
                <td> <button type="button" class="btn btn-danger"   data-toggle="modal" data-target="#delete-modal" (click)="prepareDeleteMenu(dish)" >&times;</button></td>
-               <td><button type="button" class="btn btn-warning"   data-toggle="modal" data-target="#edit-modal" (click)="showMenuToUpdate(dish)"  >edit</button></td>
+              
               </tr>
               </td>
             
@@ -41,36 +42,36 @@
     </table>
 
     <div *ngIf="update==true" >
-      <h2  style="color: black;">Update the dish</h2>
+      <h2  style="color: black;">Modifier un plat</h2>
       <div>
         <form (ngSubmit)="updateDish()"> 
           <!-- dish's name -->   
           <div class="form-group">
-            <label for="nom">Dish's name</label>
-            <input type="text" class="form-control" placeholder="Enter the new name "  id="name" required #name="ngModel" name="name" value="{{newMenu.name}}" required [(ngModel)]="newMenu.name" >
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" placeholder="Enter the new name "  id="name" required #name="ngModel" name="name" value="{{newMenu.name}}" required [(ngModel)]="newMenu.name" disabled>
           </div>
-          <div [hidden]="name.valid || name.pristine">The dish's name is required </div>
+          <div style="margin-bottom: 20px;color: blue;">Si vous voulez modifier le nom du plat vous devez le supprimer et ajouter un nouveau plat </div>
           <!-- Last name -->
           <div class="form-group">
-              <label for="composition">Dish's composition</label>
+              <label for="composition">Composition</label>
               <input type="text" class="form-control" placeholder="Enter the new composition "  id="composition" required #composition="ngModel"  name="composition" value="{{newMenu.composition}}" required [(ngModel)]="newMenu.composition">
           </div>  
-          <div [hidden]="composition.valid || composition.pristine">The dish's composition is required </div>
+          <div [hidden]="composition.valid || composition.pristine">la composition du plat est obligatoire </div>
        
           <div class="form-group">
-            <label for="composition">Dish's price</label>
+            <label for="composition">Prix</label>
             <input type="text" class="form-control" placeholder="Enter the new price"  id="price" required #price="ngModel"  name="price" value="{{newMenu.price}}" required [(ngModel)]="newMenu.price">
         </div>  
-        <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
+        <div [hidden]="price.valid || price.pristine"style="margin-bottom: 20px;">le prix du plat est obligatoire</div>
 
         <div class="form-group">
-          <label for="composition">Dish's type</label>
+          <label for="composition">Type</label>
           
                 <select class="browser-default " name="type" id="type" #type="ngModel" id="type" value="{{newMenu.type}}" required [(ngModel)]="newMenu.type">
                   
-                  <option value="starter" class="form-control" selected>starter</option>
-                  <option value="salad" class="form-control">salad</option>
-                  <option value="speciality" class="form-control">speciality</option>
+                  <option value="starter" class="form-control" selected>Entrée</option>
+                  <option value="salad" class="form-control">salade</option>
+                  <option value="speciality" class="form-control">specialité</option>
                  
                 </select>
        
@@ -80,12 +81,12 @@
           <div *ngIf="currentFileUpload" class="progress">
             <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
           </div>
-          <label for="composition">Dish's image</label>
+          <label for="composition">Image du plat</label>
           <input type="file" (change)="selectFile($event)" class="form-control">
         </div> 
 
-          <button type="submit" class="btn btn-success" style="margin-top: 50px;">Submit</button>
-          <button type="button" class="btn btn-success" (click)="update=false" style="background-color: mediumpurple;margin-top: 50px;" >cancel</button>
+          <button type="submit" class="btn btn-success" style="margin-top: 50px;">Valider</button>
+          <button type="button" class="btn btn-success" (click)="update=false" style="background-color: mediumpurple;margin-top: 50px;" >Annuler</button>
         </form>
       </div>
     

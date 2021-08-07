@@ -128,7 +128,7 @@ export class DashboardAdminComponent implements OnInit {
   }
   getInfoRestau(idRestau,ens:any)
   {
-    this.restauService.getInfoRestaurantById(idRestau).snapshotChanges().subscribe(infos => {
+   return this.restauService.getInfoRestaurantById(idRestau).snapshotChanges().subscribe(infos => {
      //console.log(infos[0].payload.val()['name'])
       //ens.push(infos[0].payload.val()['name'])
        ens["restauName"]=infos[0].payload.val()['name']

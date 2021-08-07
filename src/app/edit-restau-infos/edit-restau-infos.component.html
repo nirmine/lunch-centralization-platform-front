@@ -86,7 +86,7 @@
 
 
 
-<div style="margin-top: 180px; margin-bottom: 150px;height: 50%;width: 50%;margin-left: 7%;">
+<div style="margin-top: 90px; margin-bottom: 150px;height: 50%;width: 50%;margin-left: 7%;">
 
   <h2 style="color: black;">Saisir les infos de votre profile</h2>
   <div style="margin-left: 5%;">
@@ -98,7 +98,7 @@
 
       </div>
 
-      <div [hidden]="name.valid || name.pristine">The restaurant's name is required </div>
+      <div [hidden]="name.valid || name.pristine">le nom du restaurant est obligatoire </div>
 
       <div class="form-group">
         <label for="nom">Adresse</label>
@@ -106,20 +106,21 @@
 
       </div>
 
-      <div [hidden]="address.valid || address.pristine">The restaurant's address is required </div>
+      <div [hidden]="address.valid || address.pristine">l'adresse du restaurant est obligatoire</div>
       <!-- Last name -->
       <div class="form-group">
           <label for="composition">Phone Number</label>
           <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Enter your phone number"required [(ngModel)]="restau.phoneNumber" #phoneNumber="ngModel">
           
       </div>  
-      <div [hidden]="phoneNumber.valid || phoneNumber.pristine">The restaurant's phone number is required </div>
+      <div [hidden]=" phoneNumber.pristine || phoneError" style="color: red;margin-bottom: 20px;">le numero de téléphone est obligatoire et doit etre un nombre de 8 chiffres</div>
+      
    
       <div class="form-group">
         <label for="composition">Email</label>
-        <input type="text" class="form-control" name="email" id="email" placeholder="Enter your email" [(ngModel)]="restau.email" #email="ngModel">
+        <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" [(ngModel)]="restau.email" #email="ngModel">
     </div>  
-    
+    <div [hidden]='emailError' style="color: red;margin-bottom: 20px;">l'email doit etre sous forme xxxx@xx.xx or xxxx@xxx.xxx</div>
 
     
   <div class="form-group">
@@ -130,19 +131,21 @@
          
            
             <option value="yes"  class="form-control" >oui</option>
-            <option value="no" selected>non</option>
+            <option value="no" >non</option>
 
 
           </select>
  
     </div>
-    <div [hidden]="delivery.valid || delivery.pristine">Please let us know if the delivery is on your charge </div>
+    <div [hidden]="delivery.valid || delivery.pristine">indiquez si la livraison est toujours à votre charge ou non </div>
   
     <div class="form-group">
       <label for="composition">Prix livraison</label>
       <input type="number" class="form-control" name="price" id="price" placeholder="Si oui,entrez le prix de la livraison" [(ngModel)]="restau.price" #price="ngModel">
   </div> 
+  <div [hidden]='priceError' style="color: red;margin-bottom: 20px;">Veuillez saisir le prix de livraison</div>
     <div class="form-group">
+      <div *ngIf=" imgSrc!=undefined"><img src="{{imgSrc.ImageUrl}}" alt="No image found" style="height: 200px;width: 180px;"></div>
     <div *ngIf="currentFileUpload" class="progress">
       <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
     </div>

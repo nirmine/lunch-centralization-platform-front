@@ -10,16 +10,21 @@ import { RestaurantService } from '../services/restaurant.service';
 export class AddRestaurantAdminComponent implements OnInit {
 
   constructor(private restauService:RestaurantService,private router : Router, private route: ActivatedRoute) { }
-
+error=true;
   restau:any={};
   ngOnInit(): void {
   }
   onSubmit()
   {
-    
-    console.log(this.restau);
-    this.restauService.createRestaurant(this.restau.id,this.restau);
+    let ch:string=this.restau.id;
+    if(ch.indexOf('.')>0 || ch.indexOf('[')>0 || ch.indexOf('#')>0 || ch.indexOf(']')>0 || ch.indexOf('$')>0)
+    {console.log(this.restau);
+      this.error=false;
+    }
+    else
+    {this.restauService.createRestaurant(this.restau.id,this.restau);
     this.router.navigate(['restaus-list']);
+    }
   }
 
 }

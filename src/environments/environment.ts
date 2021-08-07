@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // Your web app's Firebase configuration
- firebaseConfig :{
+ /*firebaseConfig :{
     apiKey: "AIzaSyBOHL9vW8pw-nfMCohbRx939amG9pVhX0s",
     authDomain: "centralisation-des-commandes.firebaseapp.com",
     databaseURL: "https://centralisation-des-commandes-default-rtdb.europe-west1.firebasedatabase.app",
@@ -13,6 +13,15 @@ export const environment = {
     storageBucket: "centralisation-des-commandes.appspot.com",
     messagingSenderId: "349537234027",
     appId: "1:349537234027:web:6f1196c25c8b10f878152e"
+  },*/
+  firebaseConfig : {
+    apiKey: "AIzaSyCDbFrw5yb_NR5k_G0OZuZMGXO03wEhGxs",
+    authDomain: "restau-bf512.firebaseapp.com",
+    databaseURL: "https://restau-bf512-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "restau-bf512",
+    storageBucket: "restau-bf512.appspot.com",
+    messagingSenderId: "836497945284",
+    appId: "1:836497945284:web:1ca18329b67fddde170f91"
   },
 };
 

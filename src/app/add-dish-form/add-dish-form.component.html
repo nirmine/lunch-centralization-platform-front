@@ -1,51 +1,53 @@
   
-<div style="margin-top: 180px; margin-bottom: 150px;margin-right: 100px;margin-left: -50px;">
+<div style="margin-top: 90px; margin-bottom: 150px;margin-right: 100px;margin-left: -50px;">
 
-    <h2 style="color: black;">Add a dish to this restaurant's menu</h2>
+    <h2 style="color: black;">Nouveau Plat</h2>
     <div>
       <form (ngSubmit)="onSubmit()"> 
         <!-- First name -->   
         <div class="form-group">
-          <label for="nom">Dish's name</label>
-          <input type="text" class="form-control" placeholder="Entre the name of the restaurant" #name="ngModel" id="name" required [(ngModel)]="menu.name" name="name" >
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" placeholder="Entrez le nom du plat" #name="ngModel" id="name" required [(ngModel)]="menu.name" name="name" >
         </div>
-        <div [hidden]="name.valid || name.pristine">The dish's name is required </div>
+        <!--<div [hidden]="name.valid || name.pristine">The dish's name is required </div>-->
+        <div [hidden]='nameError' style="color: red;margin-bottom: 20px;">le nom du plat est obligatoire ne contenant pas les cat</div>
         <!-- Last name -->
         <div class="form-group">
-            <label for="composition">Dish's composition</label>
-            <input type="text" class="form-control" placeholder="Enter the dish's composition " #composition="ngModel" id="composition" required [(ngModel)]="menu.composition" name="composition" >
+            <label for="composition">Composition</label>
+            <input type="text" class="form-control" placeholder="Entrez la composition du plat" #composition="ngModel" id="composition" required [(ngModel)]="menu.composition" name="composition" >
         </div>  
-        <div [hidden]="composition.valid || composition.pristine">The dish's composition is required </div>
-     
+        <!--<div [hidden]="composition.valid || composition.pristine">The dish's composition is required </div>-->
+        <div [hidden]='compositionError' style="color: red;margin-bottom: 20px;">Veuillez saisir la composition du plat</div>
+        
         <div class="form-group">
-          <label for="composition">Dish's price</label>
-          <input type="text" class="form-control" placeholder="Entrer the dish's price " #price="ngModel" id="price" required [(ngModel)]="menu.price" name="price" >
+          <label for="price">Prix</label>
+          <input type="number" class="form-control" placeholder="Entrez le prix du plat " #price="ngModel" id="price" required [(ngModel)]="menu.price" name="price" >
       </div>  
-      <div [hidden]="price.valid || price.pristine">The dish's price is required </div>
+      <div [hidden]='priceError' style="color: red;margin-bottom: 20px;">Veuillez saisir le prix du plat </div>
 
       
     <div class="form-group">
-      <label for="composition">Dish's type</label>
+      <label for="composition">Type</label>
       
             <select class="browser-default " name="type" id="type" #type="ngModel" id="type" required [(ngModel)]="menu.type">
               
-              <option value="starter" class="form-control" selected>starter</option>
-              <option value="salad" class="form-control">salad</option>
-              <option value="speciality" class="form-control">speciality</option>
+              <option value="starter" class="form-control" selected>entrée</option>
+              <option value="salad" class="form-control">salade</option>
+              <option value="speciality" class="form-control">specialité</option>
              
             </select>
    
       </div>
-      <div [hidden]="type.valid || type.pristine">The dish's type is required </div>
+      <div [hidden]='typeError' style="color: red;margin-bottom: 20px;">Veuillez saisir le type du plat</div>
     
       <div class="form-group">
       <div *ngIf="currentFileUpload" class="progress">
         <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{percentage}}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:percentage+'%'}"> {{percentage}}%</div>
       </div>
-      <label for="composition">Dish's image</label>
+      <label for="image">Dish's image</label>
       <input type="file" (change)="selectFile($event)" class="form-control">
     </div>  
-  
+    <div [hidden]='imageError' style="color: red;margin-bottom: 20px;">Veuillez saisir une image du plat</div>
 
         <button type="submit" class="btn btn-success" style="margin-top: 50px;">Submit</button>
       </form>

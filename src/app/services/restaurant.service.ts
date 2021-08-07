@@ -308,7 +308,7 @@ getInfosDish(idRestau,idDish:any)
      });
 }*/
 
-getImageSrc(idRestau:any,idDish:any,ens:any)
+getImageSrc(idRestau:any,idDish:any,ens:any) //returns the url of the dish's image
 {
   let url="";
   let menu
@@ -347,11 +347,7 @@ getImageSrc(idRestau:any,idDish:any,ens:any)
     });   
     
 }
-/*setRestauEntry(idRestau)
-{
-  let refe=this.db.database.ref(this.restauPath+'/'+idRestau);
-  refe.child("entry").set(1);
-}*/
+
 getRestauImg(idRestau:any)
 {
  
@@ -385,4 +381,6 @@ deleteRestau(restauKey:any) {
 restauRef.remove(restauKey);
   this.db.list(this.ordersPath).remove(restauKey);
 }
+
+
 }

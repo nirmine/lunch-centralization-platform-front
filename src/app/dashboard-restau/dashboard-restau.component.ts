@@ -32,7 +32,7 @@ export class DashboardRestauComponent implements OnInit {
       let el:any={};
       let elt:any;
       let x;
-    
+    let note;
     
    // console.log(this.restauId)
       for(e in order)
@@ -43,6 +43,7 @@ export class DashboardRestauComponent implements OnInit {
           //console.log(elt)//=delivery/status/{..}
          if(order[e].key!="delivery" && order[e].key!="status")
          {
+           note=""
           //console.log(order[e].key)//client id
           for(x in  elt)
           { 
@@ -54,7 +55,7 @@ export class DashboardRestauComponent implements OnInit {
             el.name=x;//dish's name
               el.client=order[e].key
             el.nbr=elt[x]//how many times this dish is ordered by this user
-           
+            
            this.restauService.getInfoUser(order[e].key,el)
           this.restauService.getInfosDish(this.restauId,x).snapshotChanges().subscribe(infos => {
            //  console.log(infos[0].payload.val())
@@ -71,6 +72,16 @@ export class DashboardRestauComponent implements OnInit {
             
            // console.log(ee)
           }
+          else
+          {
+            
+            if(x=="note")
+            {
+              console.log(elt[x])
+              note=elt[x]
+            }
+          }
+          el.note=note
           }
         }
         else
