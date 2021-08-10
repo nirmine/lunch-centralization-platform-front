@@ -11,12 +11,12 @@ import { map } from 'rxjs/operators';
 export class ValidateOrderProxymianComponent implements OnInit {
   idRestau:any;//the key of the desired restaurant 
   userId:any;
-
+  role:any;
   constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
     this.idRestau=sessionStorage.getItem('restauId');
     this.userId=sessionStorage.getItem('userId');
 
-    
+    this.role=sessionStorage.getItem('role')
 
 
 
@@ -151,8 +151,13 @@ export class ValidateOrderProxymianComponent implements OnInit {
     {
       this.resService.updateDishNumber(this.idRestau,this.userId,this.orderList[x].name,this.orderList[x].nbr,this.note,this.total);
     }
-  
-this.router.navigate(['dashboard'])
+  if(this.role=='normal')
+  this.router.navigate(['dashboard'])
+  else 
+  {
+    if(this.role=='admin' || this.role=='super')
+    this.router.navigate(['dashboard-admin'])
+  }
   }
   deleteOrderedDish(idDish:any)
   {

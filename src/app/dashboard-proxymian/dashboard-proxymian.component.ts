@@ -188,8 +188,8 @@ restausList:any=[];
   }
   setOrderAsDone(idRestau:any)
   {
-    let x:any=['nermine'];
-    this.restauService.setOrderAsDone(idRestau,this.idUser,x)
+  //  let x:any=['nermine'];
+    this.restauService.setOrderAsDone(idRestau,this.idUser)
     //let y:string[]=x.get('id');
     //console.log(x)
   }

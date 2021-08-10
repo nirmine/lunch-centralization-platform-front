@@ -106,7 +106,7 @@ export class SigninAdminComponent implements OnInit {
                  sessionStorage.setItem('role','super');
                  sessionStorage.setItem('userId', this.user.id);
                  sessionStorage.setItem('name', infos[0].payload.val()['name']);
-                 this.router.navigate(['dashboard-super']);
+                 this.router.navigate(['addNewAdmin']);
                  } else 
                  {
                  this.erreur = false;

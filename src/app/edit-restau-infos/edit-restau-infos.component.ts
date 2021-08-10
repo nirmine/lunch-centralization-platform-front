@@ -24,9 +24,9 @@ export class EditRestauInfosComponent implements OnInit {
     console.log(this.idUser)
       this.restService.getRestauImageSrc(this.idUser,this.imgSrc)
      
-     if(this.restau.delivery==undefined || this.restau.length=={})
-     this.restau.delivery="no";
-
+    /* if(this.restau.delivery==undefined || this.restau.length==0)
+     this.restau.delivery="no";*/
+      console.log(this.restau.delivery)
    }
    idUser:any;
  
@@ -35,6 +35,7 @@ export class EditRestauInfosComponent implements OnInit {
    phoneError=true;
    imgSrc:any={};
    priceError=true;
+   deliveryError=true
    ngOnInit(): void {
  
    }
@@ -53,7 +54,7 @@ export class EditRestauInfosComponent implements OnInit {
      {*/
        if(isNaN(Number(this.restau.phoneNumber))==false && isNaN(Number(this.restau.phoneNumber[0]))==false && this.restau.phoneNumber.length==8)
        {
-          if(this.restau.email.length!=0)
+          if(this.restau.email.length!=0)//check if it is an email 
           { console.log("1")
             if( !this.isEmail(this.restau.email) )
            {
@@ -64,18 +65,25 @@ export class EditRestauInfosComponent implements OnInit {
               if(this.restau.delivery==undefined)
               {
                 console.log("3")
-                this.restau.delivery="no";
-
+               // this.restau.delivery="no";
+                  this.deliveryError=false
               }
+              else
               {
               if( this.restau.delivery=="no")
               {this.restau.price=""
               console.log("4")
-              this.save();
+             
               if(this.selectedFiles!=undefined)
-              this. upload();
+                {
+                  this. upload();
+                  this.save();
+                } 
               else
-              this.router.navigate(['dashboard-restau']);
+                 {
+                  this.save();
+                  this.router.navigate(['dashboard-restau']);
+              }
               }
               else
                {
@@ -85,11 +93,17 @@ export class EditRestauInfosComponent implements OnInit {
                   if( this.restau.price==undefined || this.restau.price=="")
                 this.priceError=false
                 else
-             { /*this.save();
-              if(this.selectedFiles!=undefined)
-              this. upload();
-              else
-              this.router.navigate(['dashboard-restau']);*/
+             {  
+                if(this.selectedFiles!=undefined)
+              {
+                this. upload();
+                this.save();
+              } 
+            else
+               {
+                this.save();
+                this.router.navigate(['dashboard-restau']);
+            }
              }}
                }
               }
@@ -116,8 +130,8 @@ export class EditRestauInfosComponent implements OnInit {
               this.save();
               if(this.selectedFiles!=undefined)
               this. upload();
-              else
-              this.router.navigate(['dashboard-restau']);
+              /*else
+              this.router.navigate(['dashboard-restau']);*/
               }
      else
       {
@@ -129,8 +143,8 @@ export class EditRestauInfosComponent implements OnInit {
     { this.save();
      if(this.selectedFiles!=undefined)
      this. upload();
-     else
-     this.router.navigate(['dashboard-restau']);
+     /*else
+     this.router.navigate(['dashboard-restau']);*/
     }}
       }
 

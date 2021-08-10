@@ -137,7 +137,7 @@
           </select>
  
     </div>
-    <div [hidden]="delivery.valid || delivery.pristine">indiquez si la livraison est toujours à votre charge ou non </div>
+    <div [hidden]="deliveryError" style="color: red;margin-bottom: 20px;">indiquez si la livraison est toujours à votre charge ou non </div>
   
     <div class="form-group">
       <label for="composition">Prix livraison</label>

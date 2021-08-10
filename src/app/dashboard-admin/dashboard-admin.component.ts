@@ -257,4 +257,28 @@ export class DashboardAdminComponent implements OnInit {
     sessionStorage.setItem('restauId',idRestau)
     this.router.navigate(['users-list'])
   }
+  setOrderAsDone(idUser:any,idRestau:any)
+  {
+
+    this.restauService.setOrderAsDone(idRestau,idUser)
+  
+   /* console.log(idRestau)
+    console.log(idUser)*/
+  }
+  editOrder(idRestau:any,userId:any)
+  {
+    sessionStorage.setItem('restauId',idRestau);
+    sessionStorage.setItem('userId',userId)
+   this.router.navigate(['RestauMenu']);
+  }
+  deleteOrderOfUser(idRestau:any,idUser:any)
+  {
+    this.restauService.deleteUserOrder(idRestau,idUser)
+    if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
+      localStorage.setItem('firstReload', 'false');
+      window.location.reload();
+    } else {
+      localStorage.setItem('firstReload', 'true');
+    }
+  }
 }

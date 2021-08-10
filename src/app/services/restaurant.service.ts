@@ -124,8 +124,8 @@ updateOrderList(userId:any,dishkey:any,idRestau:any,nbrPieces:number)
 {
   let ref=this.db.database.ref(this.ordersPath+'/'+idRestau+'/'+userId);
   ref.child(dishkey).set(nbrPieces);
-  let refe=this.db.database.ref(this.ordersPath+'/'+idRestau+'/'+userId);
-   refe.child("status").set("not confirmed");
+  //let refe=this.db.database.ref(this.ordersPath+'/'+idRestau+'/'+userId);
+   ref.child("status").set("not confirmed");
    let reference=this.db.database.ref(this.ordersPath+'/'+idRestau);
    this.getInfoRestaurantById(idRestau).snapshotChanges().subscribe(infos => {
 
@@ -223,10 +223,10 @@ deleteOrderOfUser(idRestau:any,idUser:any): Promise<void> {
   return ref.child("status").set("canceled");
 }
 
-setOrderAsDone(idRestau:any,idUser:any,id:any)
+setOrderAsDone(idRestau:any,idUser:any)
 {
   let ens={};
-  let x="0";
+ // let x="0";
   let ref=this.db.database.ref(this.finishedOrdersPath+'/'+idRestau);
   let orderRef=this.db.list(this.ordersPath+'/'+idRestau);
   this.getOrderOfUserByIdRestau(idRestau,idUser).snapshotChanges().subscribe(infos => {
@@ -248,6 +248,21 @@ setOrderAsDone(idRestau:any,idUser:any,id:any)
          console.log(error);
        });
 
+}
+deleteUserOrder(idRestau:any,idUser:any)
+{
+let orderRef=this.db.list(this.ordersPath+'/'+idRestau);
+   this.getOrderOfUserByIdRestau(idRestau,idUser).snapshotChanges().subscribe(infos => {  
+   orderRef.remove(idUser)
+     this.getOrdersByIdRestau(idRestau).snapshotChanges().subscribe(res=>{
+      
+       if(res.length==2 || res.length==1)
+       this.db.list(this.ordersPath).remove(idRestau);
+     })
+     
+        }, (error) => {
+          console.log(error);
+        });
 }
 getFinishedOrdersOfUser(idUser:any)
 {
@@ -281,7 +296,7 @@ setDelivery(idRestau:any,volunteer:any)
 }
 
 getInfoUser(idUser,ens:any)
-  {
+{
     this.getInfoUserById(idUser).snapshotChanges().subscribe(infos => {
      //console.log(infos[0].payload.val()['name'])
       //ens.push(infos[0].payload.val()['name'])
@@ -382,5 +397,9 @@ restauRef.remove(restauKey);
   this.db.list(this.ordersPath).remove(restauKey);
 }
 
+getFeedbacksOfRestau(idRestau:any)
+{
+  return this.db.list(this.finishedOrdersPath, ref => ref.orderByKey().equalTo(idRestau));
+ }
 
 }

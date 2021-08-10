@@ -6,7 +6,7 @@
         <h2>Menu</h2>
         <p>Check Our Tasty Menu</p>
       </div>
-      <div class="book-a-table" style="margin-left: 80%;"><div class="php-email-form"><button type="button"(click)="goToOrderValidationPage()">Total order</button></div></div>
+      <div class="book-a-table" style="margin-left: 80%;"><div class="php-email-form"><button type="button"(click)="goToOrderValidationPage()" *ngIf="test=='false'">Total order</button></div></div>
 
       <div class="row" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-12 d-flex justify-content-center">
@@ -29,7 +29,7 @@
           <div class="menu-ingredients">
             {{dish['composition']}}
           </div>
-          <div class="menu-ingredients" style="margin-left: 120px;">
+          <div class="menu-ingredients" style="margin-left: 120px;" *ngIf="test=='false'">
             <a (click)=" orderDish(dish['name'])" class="ord">==order==></a>
           </div>
         </div>
@@ -42,7 +42,7 @@
           <div class="menu-ingredients">
             {{dish['composition']}}
           </div>
-          <div class="menu-ingredients" style="margin-left: 120px;">
+          <div class="menu-ingredients" style="margin-left: 120px;" *ngIf="test=='false'">
             <a (click)=" orderDish(dish['name'])" class="ord">==order==></a>
           </div>
         </div>
@@ -55,7 +55,7 @@
           <div class="menu-ingredients">
             {{dish['composition']}}
           </div>
-          <div class="menu-ingredients" style="margin-left: 120px;" *ngIf="test=='false'">
+          <div class="menu-ingredients" style="margin-left: 120px;" *ngIf="test=='false'" >
             <a (click)=" orderDish(dish['name'])" class="ord" >==order==></a>
           </div>
         </div>

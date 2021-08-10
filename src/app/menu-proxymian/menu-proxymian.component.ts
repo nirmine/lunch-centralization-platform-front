@@ -13,6 +13,7 @@ export class MenuProxymianComponent implements OnInit {
   constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
     this.idRestau=sessionStorage.getItem('restauId');
     this.userId=sessionStorage.getItem('userId');
+    this.role=sessionStorage.getItem('role')
     console.log(this.userId)
     this.retrieveAllMenus();
     this.resService.getOrderOfUserByIdRestau(this.idRestau,this.userId).snapshotChanges().subscribe
@@ -20,11 +21,14 @@ export class MenuProxymianComponent implements OnInit {
       
       if(res.length!=0)
       {
-       
-        if(res[0].payload.val()['status']=="confirmed")
+       if(this.role=='normal')
+       { if(res[0].payload.val()['status']=="confirmed")
             this.test="true";
             else
             this.test="false"
+        }
+        else
+          this.test="false"
         
       }
       else
@@ -37,7 +41,8 @@ export class MenuProxymianComponent implements OnInit {
   userId:any;
   map = new Map();
   menus: any = [];
-  test:any;//test==true:this user can't order from this restau because he has confirmed his order=>he should ask from the admin to change his order
+  role:any;
+  test="true";//test==true:this user can't order from this restau because he has confirmed his order=>he should ask from the admin to change his order
   ngOnInit(): void {
   }
   retrieveAllMenus() {
@@ -72,7 +77,9 @@ export class MenuProxymianComponent implements OnInit {
 nbr:number=1;
   orderDish(dishkey:any)
   {
-//console.log(dishkey)
+console.log(dishkey)
+console.log(this.userId)
+console.log(this.idRestau)
 console.log(this.resService.updateOrderList(this.userId,dishkey,this.idRestau,this.nbr));
   }
 

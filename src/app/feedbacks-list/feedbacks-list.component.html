@@ -1,1 +1,49 @@
-<p>feedbacks-list works!</p>
+<section id="feed" class="chefs" style="margin-top: 90px; margin-bottom: 0px;margin-left: -300px;" >
+    <div class="container" data-aos="fade-up">
+<div class="section-title">
+        <h2>Commandes anciennes</h2>
+        <p>Consultez Avis Clients</p>
+      </div>
+
+              <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr class="nouveau">
+                        
+                          <th>Commande</th>
+                          
+                        
+                       
+                          <th class="text-center">Feedback</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngIf="finishedOrders.length!=0">
+                      <tr class="nouv" *ngFor="let order of finishedOrders">
+                         
+                          <td>{{order.orders}}</td>
+                         
+                          
+                  
+                          <td class="td-actions text-center">
+                                       <p *ngIf="order.feedback !=null" style="font-size:large;">{{order.feedback}}</p>             
+                            
+                        </td>
+                      </tr>
+              
+                
+                   
+                
+                  </tbody>
+                  <tbody *ngIf="finishedOrders.length==0">
+                    <tr class="nouv" >
+                        <!--<td class="text-center">1</td>-->
+                        <td colspan="5" class="text-center">No orders found</td>                       
+                    </tr>
+                </tbody>
+              </table>
+              </div>
+
+            
+
+          </div>
+        </section>
