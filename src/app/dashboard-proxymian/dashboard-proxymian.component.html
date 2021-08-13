@@ -11,8 +11,8 @@
 
         <div class="row">
 
-          <div class="col-lg-4 col-md-6" *ngFor="let restau of restausList" style="width: 300px;height:250px;">
-            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-lg-4 col-md-6" *ngFor="let restau of restausList" style="width: 300px;height:250px;" >
+            <div class="member" data-aos="zoom-in" data-aos-delay="100" >
               <img src="{{map.get(restau['name'])}} " class="img-fluid" alt="" style="width: 300px;height:250px;">
               <div class="member-info">
                 <div class="member-info-content">
@@ -20,8 +20,8 @@
                   <span>{{restau.address}}</span>
                 </div>
                 <div class="social">
-                  <a (click)=" goToMenu(restau.key)">==Menu==></a>
-                  
+                  <a (click)=" goToMenu(restau.key)" *ngIf="restau.menu!=undefined">==Menu==></a>
+                  <p *ngIf="restau.menu==undefined" style="color: blanchedalmond;">No Menu found</p>
                 </div>
               </div>
             </div>

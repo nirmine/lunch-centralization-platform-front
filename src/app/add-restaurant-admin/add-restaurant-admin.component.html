@@ -8,6 +8,7 @@
           <input type="text" class="form-control" placeholder="Enter the restaurant's identifier'"  id="id" required [(ngModel)]="restau.id" name="id">
         </div>
         <div [hidden]='error' style="color: red;margin-bottom: 20px;">the identifier must be non empty string and can't contain . [ ] # $ </div>
+        <div [hidden]='existingError' style="color: red;margin-bottom: 20px;">This identifier already exists </div>
         <!-- Last name -->
         <div class="form-group">
             <label for="pwd">Password:</label>

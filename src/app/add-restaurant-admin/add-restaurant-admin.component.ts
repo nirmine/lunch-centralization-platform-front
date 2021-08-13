@@ -11,6 +11,7 @@ export class AddRestaurantAdminComponent implements OnInit {
 
   constructor(private restauService:RestaurantService,private router : Router, private route: ActivatedRoute) { }
 error=true;
+existingError=true
   restau:any={};
   ngOnInit(): void {
   }
@@ -22,8 +23,21 @@ error=true;
       this.error=false;
     }
     else
-    {this.restauService.createRestaurant(this.restau.id,this.restau);
-    this.router.navigate(['restaus-list']);
+    {
+      this.restauService.getInfoRestaurantById(this.restau.id).snapshotChanges().subscribe(res=>{
+        console.log(res.length)
+        if(res.length>0)
+        this.existingError=false
+        else
+        {
+          this.restauService.createRestaurant(this.restau.id,this.restau);
+          this.router.navigate(['restaus-list']);
+        }
+        
+      })
+      
+      /*this.restauService.createRestaurant(this.restau.id,this.restau);
+    this.router.navigate(['restaus-list']);*/
     }
   }
 

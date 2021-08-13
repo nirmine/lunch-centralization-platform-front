@@ -124,6 +124,7 @@ restausList:any=[];
        // console.log(this.restausList)
       for (elt in this.restausList) 
         {
+          console.log(this.restausList[elt]['menu'])
           if(this.restausList[elt]['img']==undefined)
             console.log("undefined")
           else

@@ -169,11 +169,16 @@ pushupdatedFileToStorage(imageKey:any,restauKey:any,dishkey:any,fileUpload: File
   this.db.list(this.restauPath+'/'+restauKey+'/menu/'+dishkey+'/img').update(imageKey ,fileUpload);
 }
 
-getOrdersByIdRestau(idRestau:any)//return all the orders of a certain restaurant
+
+deleteDishImageFromStorage(restauKey: any,dishImageName:any) {
+  const storageRef = this.storage.ref(this.dishStoragePath+'/'+restauKey);
+  storageRef.child(dishImageName).delete();
+}
+getOrdersByIdRestau(idRestau:any)//return all the orders for a certain restaurant
 {
   return this.db.list('/orders/'+idRestau, ref => ref.orderByKey());
 }
-getDishInfoById(idRestau:any,idDish:any)
+getDishInfoById(idRestau:any,idDish:any)//returns all infos of a certain dish of certain restau
 {
   //console.log(idDish)
   let ch:string=idDish;

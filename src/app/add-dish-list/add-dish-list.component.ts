@@ -71,8 +71,12 @@ export class AddDishListComponent implements OnInit {
     this.update=false;
     //assign delete-Customer
     this.deletedMenu =deleteMenu;
-  //  console.log(deleteMenu.key);
-    this.deleteMenu(deleteMenu.key);
+
+let i 
+for(i in deleteMenu['img'] )
+//console.log(deleteMenu['img'][i].name);//name of the dish's image in the cloud storage
+this.resService.deleteDishImageFromStorage(this.Restaukey,deleteMenu['img'][i].name)//delete the dish's image from the cloud storage
+   this.deleteMenu(deleteMenu.key);
    
   }
 

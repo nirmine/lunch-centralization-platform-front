@@ -11,6 +11,7 @@
         </div>
         <!--<div [hidden]="name.valid || name.pristine">The dish's name is required </div>-->
         <div [hidden]='nameError' style="color: red;margin-bottom: 20px;">le nom du plat est obligatoire ne contenant pas les cat</div>
+        <div [hidden]='existingError' style="color: red;margin-bottom: 20px;">ce plat est déjà enregistré</div>
         <!-- Last name -->
         <div class="form-group">
             <label for="composition">Composition</label>

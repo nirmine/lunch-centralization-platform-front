@@ -25,18 +25,18 @@ export class AddDishFormComponent implements OnInit {
   userId:any;
   testimage:any;
   nameError=true;
+  existingError=true;
   ngOnInit(): void {
 
   }
   save() {
-      this.restService.createDishByKey(this.userId,this.menu.name, this.menu);
+  
+      
+    this.restService.createDishByKey(this.userId,this.menu.name, this.menu);
+    this.existingError=true
      // this.restService.addDishToRestaurant(this.menu.name,this.userId)
   }
-  /*
-  save(key:string) {
-      this.restService.createMenu( key,this.menu);
-  }
-  */
+
   reset(){
    /* this.menu= new Menu();
     this.currentFileUpload=new FileUpload(null);*/
@@ -51,12 +51,24 @@ export class AddDishFormComponent implements OnInit {
   onSubmit() {
    /* this.save();
     this. upload();*/
-   
-    if(this. checkForm())
-    {
-      this.save();
-    this. upload();
-    }
+    this.restService.getDishInfoById(this.userId,this.menu.name).snapshotChanges().subscribe(res=>{
+     
+      if(res.length>0)
+      this.existingError=false
+      else
+        {
+          this.existingError=true
+          if(this. checkForm())
+             {
+              this.save();
+            
+              this. upload();
+           }
+        }
+    })
+
+
+    
   }
 
  
@@ -69,6 +81,7 @@ export class AddDishFormComponent implements OnInit {
     this.selectedFiles = event.target.files;
   }
   upload() {
+    
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
 
@@ -83,15 +96,14 @@ export class AddDishFormComponent implements OnInit {
       }
     );
     this.restService.getDishImg(this.userId,this.menu.name).snapshotChanges().subscribe(infos => {
+      
       console.log(infos)
-     if(infos.length!=0)
+     if(infos.length!=0 )  //the image have been successfully stored
       //this.router.navigate(['addNewDish']);
-      if (!localStorage.getItem('firstReload') || localStorage.getItem('firstReload') === 'true') {
-        localStorage.setItem('firstReload', 'false');
-        window.location.reload();
-      } else {
-        localStorage.setItem('firstReload', 'true');
-      }
+      {
+      
+     window.location.reload();
+       }
        // this.reset();
     });
   }
@@ -107,7 +119,7 @@ export class AddDishFormComponent implements OnInit {
     if(ch.indexOf('.')>0 || ch.indexOf('[')>0 || ch.indexOf('#')>0 || ch.indexOf(']')>0 || ch.indexOf('$')>0 || ch=="")
     {
       this.nameError=false;
-      //console.log(false)
+   
       return false
     }
     else

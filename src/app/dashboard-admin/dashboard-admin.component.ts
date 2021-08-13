@@ -134,6 +134,7 @@ export class DashboardAdminComponent implements OnInit {
        ens["restauName"]=infos[0].payload.val()['name']
        ens["restauPhone"]=infos[0].payload.val()['phoneNumber']
        ens["restauEmail"]=infos[0].payload.val()['email']
+       ens["deliveryPrice"]=infos[0].payload.val()['price']
         }, (error) => {
           console.log(error);
         });
