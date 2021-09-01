@@ -15,8 +15,11 @@ export class ValidateOrderProxymianComponent implements OnInit {
   constructor(private resService:RestaurantService,private router : Router, private route: ActivatedRoute) {
     this.idRestau=sessionStorage.getItem('restauId');
     this.userId=sessionStorage.getItem('userId');
-
     this.role=sessionStorage.getItem('role')
+    if(this.role=="restau")
+    this.userId=sessionStorage.getItem('clientId');
+    console.log(this.userId)
+  
 
 
 
@@ -157,6 +160,10 @@ export class ValidateOrderProxymianComponent implements OnInit {
   {
     if(this.role=='admin' || this.role=='super')
     this.router.navigate(['dashboard-admin'])
+    else{
+      if(this.role=='restau' )
+    this.router.navigate(['dashboard-restau'])
+    }
   }
   }
   deleteOrderedDish(idDish:any)

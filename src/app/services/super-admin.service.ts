@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { Admin } from '../models/admin';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,18 +8,18 @@ export class SuperAdminService {
 
   private adminsPath = '/admins';
   private usersPath = '/users';
-  adminRef: AngularFireList<Admin> ;
+ // adminRef: AngularFireList<Admin> ;
   constructor(public db: AngularFireDatabase) 
   { 
-   this.adminRef = db.list(this.adminsPath); 
+   //this.adminRef = db.list(this.adminsPath); 
   }
-  createAdminByKey(key:any,admin:Admin): any {
+  /*createAdminByKey(key:any,admin:Admin): any {
     let ref=this.db.database.ref("/admins");
    return( ref.child(key).set(admin));
 
   //  return this.adminRef.push(admin);
    }
-   getAdminsList(): AngularFireList<Admin> {
+   /*getAdminsList(): AngularFireList<Admin> {
     return this.adminRef;
   }
   updateAdminInfo(key: string, value: any): Promise<void> {
@@ -34,7 +34,7 @@ export class SuperAdminService {
    return( ref.child(key).set(admin));
 
   //  return this.adminRef.push(admin);
-   }
+   }*/
    getInfoAdminById(idUser:any)//returns all the informations about this restaurant
   {
   console.log(idUser)

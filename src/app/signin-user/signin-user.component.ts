@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from '../services/restaurant.service';
-
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-signin-user',
   templateUrl: './signin-user.component.html',
@@ -90,5 +90,8 @@ export class SigninUserComponent implements OnInit {
   }*/
     }
     
-  
+  test()
+  {
+    
+  }
 }

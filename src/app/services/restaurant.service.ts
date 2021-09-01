@@ -398,10 +398,31 @@ getRestauImageSrc(idRestau:any,ens:any)
 
 deleteRestau(restauKey:any) {
   let restauRef=this.db.list(this.restauPath);
+  //this.deleteRestauImageFromStorage(restauKey)
+ // this.deleteAllDishImageOfRestauFromStorage(restauKey)
 restauRef.remove(restauKey);
-  this.db.list(this.ordersPath).remove(restauKey);
+ this.db.list(this.ordersPath).remove(restauKey);
 }
-
+deleteRestauImageFromStorage(restauKey: any) {
+ // const storageRef = this.storage.ref(this.restauStoragePath+'/'+restauKey);
+ /* let ch:string=restauKey+'/'
+  storageRef.child(ch).delete(ch);*/
+//storageRef.delete()
+/*let filePath = `${this.restauStoragePath+'/'+restauKey}/$`;
+  let storageRefe = this.storage.ref(filePath)
+  storageRefe.child(restauKey).delete();*/
+  let i:any
+  console.log(this.storage.ref(this.restauStoragePath)
+  )
+  for(i in this.storage.ref(this.restauStoragePath))
+  console.log(i)
+  //const storageRef = this.storage.ref(this.restauStoragePath).child(`${restauKey}/`).delete()
+}
+deleteAllDishImageOfRestauFromStorage(restauKey: any) {
+  const storageRef = this.storage.ref(this.dishStoragePath);
+ 
+  storageRef.child(restauKey+'/').delete();
+}
 getFeedbacksOfRestau(idRestau:any)
 {
   return this.db.list(this.finishedOrdersPath, ref => ref.orderByKey().equalTo(idRestau));

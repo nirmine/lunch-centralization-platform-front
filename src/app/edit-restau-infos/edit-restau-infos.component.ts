@@ -19,7 +19,8 @@ export class EditRestauInfosComponent implements OnInit {
     
   
     this.idUser=sessionStorage.getItem('userId');
-    
+    if(sessionStorage.getItem('role')=="super")
+    this.idUser=sessionStorage.getItem('restauid');
     this. getInfoRestau(this.idUser)
     console.log(this.idUser)
       this.restService.getRestauImageSrc(this.idUser,this.imgSrc)
@@ -42,7 +43,7 @@ export class EditRestauInfosComponent implements OnInit {
    save() {
      /*let keyRestau= this.restService.createCustomer(this.restau).key;
       localStorage.setItem('keyRestau', keyRestau);*/
-     
+      sessionStorage.setItem('restauName', this.restau.name);
       console.log(this.restService.updateRestau(this.idUser,this.restau));
    }
    reset(){
@@ -82,6 +83,9 @@ export class EditRestauInfosComponent implements OnInit {
               else
                  {
                   this.save();
+                  if(sessionStorage.getItem('role')=="super")
+                  this.router.navigate(['restaus-list']);
+                  else
                   this.router.navigate(['dashboard-restau']);
               }
               }
@@ -102,6 +106,9 @@ export class EditRestauInfosComponent implements OnInit {
             else
                {
                 this.save();
+                if(sessionStorage.getItem('role')=="super")
+                this.router.navigate(['restaus-list']);
+                else
                 this.router.navigate(['dashboard-restau']);
             }
              }}
@@ -187,7 +194,13 @@ export class EditRestauInfosComponent implements OnInit {
   this.restService.getRestauImg(this.idUser).snapshotChanges().subscribe(infos => {
     console.log(infos.length)
     if(infos.length)
-    this.router.navigate(['dashboard-restau']);
+    //this.router.navigate(['dashboard-restau']);
+    {
+      if(sessionStorage.getItem('role')=="super")
+                this.router.navigate(['restaus-list']);
+                else
+                this.router.navigate(['dashboard-restau']);
+    }
   });
 
    }

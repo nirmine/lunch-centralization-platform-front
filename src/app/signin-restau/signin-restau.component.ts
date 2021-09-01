@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RestaurantService } from '../services/restaurant.service';
-
+import * as CryptoJS from 'crypto-js';
 @Component({
   selector: 'app-signin-restau',
   templateUrl: './signin-restau.component.html',
@@ -49,7 +49,9 @@ export class SigninRestauComponent implements OnInit {
          //this.userPwd=infos[0].payload.val()['password']
          // this.restauEntry=infos[0].payload.val()['entry']
           this.restauAddress=infos[0].payload.val()['address']
-         if (form.value.password == infos[0].payload.val()['password'])//if (this.user.password === this.userPwd)
+          let decrypted = CryptoJS.AES.decrypt(infos[0].payload.val()['password'],'secret key 123');
+          let originalText = decrypted.toString(CryptoJS.enc.Utf8);
+         if (form.value.password ==  originalText )//if (this.user.password === this.userPwd)
          {
            sessionStorage.setItem('isConnected', 'true');
           //console.log('connected')

@@ -679,8 +679,21 @@ h2 {
   color: #555 !important;
 }
 
-body {
+/*body {
     font-family: "Open Sans", sans-serif;
     background: #0c0b09;
     color: #fff;
-  }
+  }*/
+img
+{
+height: 200px;
+}
+.chefs .member
+{
+    background:transparent;
+
+}
+.chefs
+{
+    margin-top: 90px;
+}

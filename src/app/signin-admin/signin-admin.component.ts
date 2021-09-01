@@ -1,3 +1,4 @@
+import { BackService } from './../services/back.service';
 import { SuperAdminService } from './../services/super-admin.service';
 import { RestaurantService } from './../services/restaurant.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SigninAdminComponent implements OnInit {
 
-  constructor(private router : Router, private route: ActivatedRoute,private restauService:RestaurantService,private adminService:SuperAdminService) 
+  constructor(private backService:BackService,private router : Router, private route: ActivatedRoute,private restauService:RestaurantService,private adminService:SuperAdminService) 
   {
-    console.log( sessionStorage.getItem('isConnected'))
+   // console.log( sessionStorage.getItem('isConnected'))
+    this.backService.getPWDValidationStatus().subscribe(res=>{console.log(res)})
    }
   erreur = true;
   noAdmin=true;

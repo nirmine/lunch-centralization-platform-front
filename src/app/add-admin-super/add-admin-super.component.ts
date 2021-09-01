@@ -2,7 +2,7 @@ import { SuperAdminService } from './../services/super-admin.service';
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Admin } from '../models/admin';
+
 
 @Component({
   selector: 'app-add-admin-super',
@@ -35,7 +35,7 @@ res.forEach(element => {
 
    }
 
-  admin:Admin=new Admin();
+  //admin:Admin=new Admin();
   users:any=[];
   ngOnInit(): void {
   }

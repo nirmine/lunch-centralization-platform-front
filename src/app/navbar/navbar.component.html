@@ -3,29 +3,34 @@
 
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-cente"  [ngStyle]="{'top':(isConnected=='true') ? '0px' : '40px' }">
+  <header id="header" class="fixed-top d-flex align-items-cente"  [ngStyle]="{'top':(isConnected=='true' ) ? '0px' : '40px' }">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
       
       <h1 class="logo me-auto me-lg-0" style="color: white;">Restaurantly</h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-      <nav id="navbar" class="navbar order-last order-lg-0" >
+      <nav id="navbar" class="navbar order-last order-lg-0 mb-0" >
         <ul>
-          <li *ngIf="userConnectedRole =='restau'" class="nav-link scrollto active">Connected as {{restauName}}</li>
+        
+          <li *ngIf="userConnectedRole =='restau'" class="nav-link scrollto active">Bienvenue {{restauName}} </li>
+          <li *ngIf="userConnectedRole =='super'" class="nav-link scrollto active">Welcome SuperAdmin</li>
+          <li *ngIf="userConnectedRole =='admin'" class="nav-link scrollto active">Welcome Admin</li>
           <li><a class="nav-link scrollto active" href="#hero" *ngIf="isConnected=='false' || isConnected==null">Home</a></li>
-          <li><a class="nav-link scrollto active"       *ngIf="isConnected=='true'" (click)="showDash()">dashboard</a></li>
+         
           <li><a class="nav-link scrollto" href="/home#about" *ngIf="isConnected=='false' || isConnected==null">About</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='admin' || userConnectedRole =='super')" href="/addRestaurant-admin">new Restaurant</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='admin' || userConnectedRole =='super')" href="/restaus-list">Restaurants</a></li>
-          
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/addNewAdmin">Admins</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='super' )" href="/dashboard-admin">Orders</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/addNewDish">Nouveau plat</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='normal' )" href="/dashboard#yorder">Your Order</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='normal' )" href="/dashboard#delivery">Delivery-Volunteer</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='normal' )" href="/dashboard#feed">Feedback</a></li>
-          <li><a class="nav-link scrollto" *ngIf="isConnected=='true' && (userConnectedRole =='restau' )" href="/editprofilRestau">Modifier infos</a></li>
+          <ng-template [ngIf]="isConnected=='true'">
+          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='admin' || userConnectedRole =='super')" href="/addRestaurant-admin">new Restaurant</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='admin' || userConnectedRole =='super')" href="/restaus-list">Restaurants</a></li>
+          <li><a class="nav-link scrollto "      (click)="showDash()">dashboard</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='super' )" href="/addNewAdmin">Admins</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='super' )" href="/dashboard-admin">Orders</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='restau' )" href="/addNewDish">Nouveau plat</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='normal' )" href="/dashboard#yorder">Your Order</a></li>
+          <li><a class="nav-link scrollto" *ngIf="(userConnectedRole =='normal' )" href="/dashboard#delivery">Delivery-Volunteer</a></li>
+          <li><a class="nav-link scrollto" *ngIf="(userConnectedRole =='normal' )" href="/dashboard#feed">Feedback</a></li>
+          <li><a class="nav-link scrollto" *ngIf="(userConnectedRole =='restau' )" href="/editprofilRestau">Modifier infos</a></li>
+        </ng-template>
           <li><a class="nav-link scrollto" href="/home#testimonials" *ngIf="isConnected=='false' || isConnected==null">Testimonials</a></li>
           
            <!--<li><a class="nav-link scrollto" href="#footer" >Contacts</a></li>
@@ -39,7 +44,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
       <!--<a (click)="signIn()" class="book-a-table-btn scrollto d-none d-lg-flex" *ngIf="isConnected=='false' || isConnected==null">sign in</a>-->
-      <nav id="navbar" class="navbar order-last order-lg-0">
+      <nav id="navbar" class="navbar order-last order-lg-0 mb-0">
       <ul>
       <li class="dropdown" *ngIf="isConnected=='false' || isConnected==null" ><a href="#" class="book-a-table-btn scrollto d-none d-lg-flex" ><span style="margin-right: 30px;">Sign in</span> <!--<i class="bi bi-chevron-down"></i>--></a>
         <ul>

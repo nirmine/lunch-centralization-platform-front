@@ -127,4 +127,11 @@ export class DashboardRestauComponent implements OnInit {
     });
   }
   
+  editOrderOfClient(idClient:any)
+  {
+    sessionStorage.setItem('restauId',this.restauId);
+    sessionStorage.setItem('clientId',idClient);
+    sessionStorage.setItem('role',"restau");
+    this.router.navigate(['validateOrder']);
+  }
 }

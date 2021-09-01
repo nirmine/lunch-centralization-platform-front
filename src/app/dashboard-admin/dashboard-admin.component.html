@@ -1,6 +1,6 @@
 
 
-   <section id="chefs" class="chefs" style=" margin-left: -270px;margin-top: 50px;height: 0px;" >
+   <section id="chefs" class="chefs" style="margin-top: 50px;height: 0px;" >
     <div class="container" data-aos="fade-up">
 <div class="section-title">
         <h2>Orders</h2>
@@ -8,7 +8,7 @@
       </div>
       </div>
       </section>
-    <section id="chefs" class="chefs" style=" margin-left: -200px;" *ngFor="let restauOrders of orders" >
+    <section id="chefs" class="chefs" style=" margin-top: 0px;" *ngFor="let restauOrders of orders" >
         <div class="container" data-aos="fade-up">
    <div class="section-title">
             <h2 style="font-size:30px;font-style:italic;" >{{restauOrders.restauName}}</h2>
@@ -74,7 +74,7 @@
               </div>
             </section>
 
-            <section id="chefs" class="chefs" style=" margin-left: -270px;margin-top: 10px;height: 0px;margin-bottom: 20%;" *ngIf="orders.length==0">
+            <section id="chefs" class="chefs" style=" margin-top: 10px;height: 0px;margin-bottom: 20%;" *ngIf="orders.length==0">
               <div class="container" data-aos="fade-up">
           <div class="section-title">
                   <h2 class="text-center"style="color: red;">No orders found for today !! check this page later</h2>

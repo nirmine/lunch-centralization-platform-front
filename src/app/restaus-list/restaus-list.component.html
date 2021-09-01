@@ -38,7 +38,9 @@
                           </td>
                           <td class="text-right">{{restau.phoneNumber}}</td>
                           <td class="td-actions text-center">
-                            
+                            <button type="button" rel="tooltip" class="btn btn-success btn-just-icon btn-sm" data-original-title="" title=""  style="height: 30px;" (click)="editRestauProfil(restau.id)">
+                              <i class="material-icons">edit</i>
+                          </button>
                         </td>
                           <td class="td-actions text-center">
                             <button type="button"   class="btn btn-link" (click)="deleteRestau(restau.id)" >
