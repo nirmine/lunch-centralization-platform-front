@@ -20,8 +20,8 @@
          
           <li><a class="nav-link scrollto" href="/home#about" *ngIf="isConnected=='false' || isConnected==null">About</a></li>
           <ng-template [ngIf]="isConnected=='true'">
-          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='admin' || userConnectedRole =='super')" href="/addRestaurant-admin">new Restaurant</a></li>
-          <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='admin' || userConnectedRole =='super')" href="/restaus-list">Restaurants</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" ( userConnectedRole =='super')" href="/addRestaurant-admin">new Restaurant</a></li>
+          <li><a class="nav-link scrollto" *ngIf=" (  userConnectedRole =='super')" href="/restaus-list">Restaurants</a></li>
           <li><a class="nav-link scrollto "      (click)="showDash()">dashboard</a></li>
           <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='super' )" href="/addNewAdmin">Admins</a></li>
           <li><a class="nav-link scrollto" *ngIf=" (userConnectedRole =='super' )" href="/dashboard-admin">Orders</a></li>

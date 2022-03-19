@@ -15,13 +15,12 @@ export const environment = {
     appId: "1:349537234027:web:6f1196c25c8b10f878152e"
   },*/
   firebaseConfig : {
-    apiKey: "AIzaSyCDbFrw5yb_NR5k_G0OZuZMGXO03wEhGxs",
-    authDomain: "restau-bf512.firebaseapp.com",
-    databaseURL: "https://restau-bf512-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "restau-bf512",
-    storageBucket: "restau-bf512.appspot.com",
-    messagingSenderId: "836497945284",
-    appId: "1:836497945284:web:1ca18329b67fddde170f91"
+    apiKey: "AIzaSyD9F6QLFhuXjaPdbhZHBfBY2Iw8D0VTR-8",
+    authDomain: "restaur-a8fea.firebaseapp.com",
+    projectId: "restaur-a8fea",
+    storageBucket: "restaur-a8fea.appspot.com",
+    messagingSenderId: "902445060579",
+    appId: "1:902445060579:web:2e3ddbcc612488d36690d6"
   },
 };
 
